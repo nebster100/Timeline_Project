@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Historical Timeline V0.0.04</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+    <div id = "Top">
+
+      <select id="dropdownOne" class = "dropdown" form = "timelineSelector">
+        <option value="Bt">Ben's Timeline</option>
+      </select>
+      <select id="dropdownTwo" class = "dropdown" form = "timelineSelector">
+        <option value="None">None</option>
+      </select>
+      <select id="dropdownThree" class = "dropdown" form = "timelineSelector">
+        <option value="None">None</option>
+      </select>
+     <button type = "button" id = "submit" onclick = "changePage()"> Submit </button>
+
+    </div>
+    <h1 style = "text-size: 10em; color: green; text-align: center;"> Use the form on top to pick your timeline </h1>
+
+    <script>
+      function changePage(){
+        var url = "";
+
+        var one = document.getElementById("dropdownOne");
+        one = one.options[one.selectedIndex].value;
+        var two = document.getElementById("dropdownTwo");
+        two = two.options[two.selectedIndex].value;
+        var three = document.getElementById("dropdownTwo");
+        three = three.options[three.selectedIndex].value;
+        
+        if(one != "None")
+          url += one;
+        if(two != "None")
+          url += two;
+        if(three != "None")
+          url += three;
+
+        location.href = url + ".html";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Historical Timeline V0.0.04</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+
+    <div id = "Top">
+
+      <select id="dropdownOne" class = "dropdown" form = "timelineSelector">
+        <option value="Bt">Ben's Timeline</option>
+      </select>
+      <select id="dropdownTwo" class = "dropdown" form = "timelineSelector">
+        <option value="None">None</option>
+      </select>
+      <select id="dropdownThree" class = "dropdown" form = "timelineSelector">
+        <option value="None">None</option>
+      </select>
+     <button type = "button" id = "submit" onclick = "changePage()"> Submit </button>
+            <button type = "button" id = "reset" onclick = "reset()"> Reset </button>
+    </div>
+    <div id = "timeline">
+
+    </div>
+    <div id = "footer">
+      <a href = "http://webkinz.com">About us and that Bs will go down here</a>
+    </div>
+
+    <script src="js/index.js"></script> 
+
+    <script type="text/javascript">
+
+    var xmlhttp = new XMLHttpRequest();
+    var url = "bT.txt";
+
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send(); 
+
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var myArr = JSON.parse(xmlhttp.responseText);
+            myFunction(myArr);
+        }
+    };
+
+
+    function myFunction(arr) {
+        var i;
+        var out = '<div class= "event offset-first"> <h1> ' + arr[0].year + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].dec + '</div>  <a href = "' + arr[0].url + '">More Info </a> </div>' ;  
+       for(i = 1; i < arr.length; i++) {
+            out += ' <div class= "event"> <h1> ' + arr[i].year + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].dec + '</div>  <a href = "' + arr[i].url + '">More Info </a> </div>';
+        }
+        document.getElementById("timeline").innerHTML = out;
+    }
+</script>
+
+  <script>
+      function changePage(){
+        var url = "";
+
+        var one = document.getElementById("dropdownOne");
+        one = one.options[one.selectedIndex].value;
+        var two = document.getElementById("dropdownTwo");
+        two = two.options[two.selectedIndex].value;
+        var three = document.getElementById("dropdownTwo");
+        three = three.options[three.selectedIndex].value;
+        
+        if(one != "None")
+          url += one;
+        if(two != "None")
+          url += two;
+        if(three != "None")
+          url += three;
+
+        location.href = url + ".html";
+      }
+
+      function reset(){
+        location.href = "/";
+      }
+    </script>
+
+
+  </body>
+</html>
