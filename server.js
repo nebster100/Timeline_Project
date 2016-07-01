@@ -1,9 +1,10 @@
- var express = require('express');
- var bodyParser = require('body-parser');
+var express = require('express');
+var bodyParser = require('body-parser');
+var _ = require('underscore');
+var db = require('./js/dataBase.js');
 
- var app = express();
- var port = process.env.PORT || 3000;
- 
+var app = express();
+var PORT = process.env.PORT || 3000; 
 app.use(express.static(__dirname + '/'));
 app.use(bodyParser.json());
  
@@ -32,6 +33,8 @@ function isUnique(tlObj, tlArr){
 }
 
 
- app.listen(port, function() {
- 	console.log('Server Started at port ' + port);
- });
+db.sequelize.sync().then(function() {
+	app.listen(PORT, function() {
+		console.log('Express listening on port ' + PORT + '!');
+	});
+});
