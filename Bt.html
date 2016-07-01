@@ -2,7 +2,7 @@
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>Historical Timeline V0.0.04</title>
+    <title>Historical Timeline V0.0.06</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
@@ -30,34 +30,37 @@
       <a href = "http://webkinz.com">About us and that Bs will go down here</a>
     </div>
 
-    <script src="js/index.js"></script> 
-
+    <!--- Sourcing Text for Timeline  -->
     <script type="text/javascript">
 
-    var xmlhttp = new XMLHttpRequest();
-    var url = "bT.txt";
+    var xhr = new XMLHttpRequest();
+    var url = "/timeline/Ben's Timeline";
 
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send(); 
+    xhr.open("GET", url, true);
+    xhr.send(); 
 
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            var myArr = JSON.parse(xmlhttp.responseText);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var myArr = JSON.parse(xhr.responseText);
+
             myFunction(myArr);
         }
     };
 
 
     function myFunction(arr) {
+
         var i;
-        var out = '<div class= "event offset-first"> <h1> ' + arr[0].year + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].dec + '</div>  <a href = "' + arr[0].url + '">More Info </a> </div>' ;  
+        var out = '<div class= "event offset-first"> <h1> ' + arr[0].year + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].description + '</div>  <a href = "' + arr[0].url + '">More Info </a> </div>' ;  
        for(i = 1; i < arr.length; i++) {
-            out += ' <div class= "event"> <h1> ' + arr[i].year + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].dec + '</div>  <a href = "' + arr[i].url + '">More Info </a> </div>';
+            out += ' <div class= "event"> <h1> ' + arr[i].year + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].description + '</div>  <a href = "' + arr[i].url + '">More Info </a> </div>';
         }
         document.getElementById("timeline").innerHTML = out;
     }
-</script>
+  </script>
 
+  <!--- Changing Webpage -->
   <script>
       function changePage(){
         var url = "";
