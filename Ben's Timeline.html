@@ -84,7 +84,7 @@
         var i;
         var out = '<div class= "event offset-first"> <h1> ' + arr[0].year + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].description + '</div>  <a href = "' + arr[0].url + '">More Info </a> </div>' ;  
        for(i = 1; i < arr.length; i++) {
-            out += ' <div class= "event"> <h1> ' + arr[i].year + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].description + '</div>  <a href = "' + arr[i].url + '">More Info </a> </div>';
+            out += ' <div class= "event"> <h1> ' + arr[i].year + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].description + '</div>  <a href = "' + arr[i].link + '">More Info </a> </div>';
         }
         document.getElementById("timeline").innerHTML = out;
     }
