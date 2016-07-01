@@ -12,8 +12,8 @@ module.exports = function(sequelize, DataTypes) {
 			}
 		},
 		description: {
-			type: DataTypes.STRING,
-			allowNull: false,
+			type: DataTypes.STRING(2000),
+			allowNull: false
 		},
 		link: {
 			type: DataTypes.STRING,
