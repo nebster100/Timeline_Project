@@ -2,7 +2,7 @@
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>Historical Timeline V0.0.06</title>
+    <title>Historical Timeline V0.0.07</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
@@ -18,10 +18,20 @@
       <select id="dropdownThree" class = "dropdown" form = "timelineSelector">
         <option value="None">None</option>
       </select>
-     <button type = "button" id = "submit" onclick = "changePage()"> Submit </button>
+      <div id = "Buttons">
+          <button type = "button" id = "submit" onclick = "changePage()"> Submit </button>
+      </div>
 
     </div>
-    <h1 style = "text-size: 10em; color: green; text-align: center;"> Use the form on top to pick your timeline </h1>
+
+    <div id = "timeline">
+    </div>
+    <div id = "footer">
+      <a href = "http://webkinz.com">About us and that Bs will go down here</a>
+    </div>
+
+
+
  
   <script type="text/javascript">
     var xhreq = new XMLHttpRequest();
@@ -44,9 +54,11 @@
         document.getElementById("dropdownOne").innerHTML = out;
     }
     </script>
+
+
     <script>
       function changePage(){
-        var url = "";
+        var url = "timeline/";
         var one = document.getElementById("dropdownOne");
         one = one.options[one.selectedIndex].value;
         var two = document.getElementById("dropdownTwo");
@@ -60,8 +72,39 @@
           url += two;
         if(three != "None")
           url += three;
-        location.href = url + ".html";
+
+        if(url != "timeline/"){
+            document.getElementById("Buttons").innerHTML = '<button type = "button" id = "submit" onclick = "changePage()"> Submit </button><button type = "button" id = "reset" onclick = "resetPage()"> Reset </button>';
+        }
+
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.send(); 
+
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var myArr = JSON.parse(xhr.responseText);
+
+                makeTimeline(myArr);
+            }
+        };
+
+       function makeTimeline(arr) {
+
+        var i;
+        var out = '<div class= "event offset-first"> <h1> ' + arr[0].year + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].description + '</div>  <a href = "' + arr[0].url + '">More Info </a> </div>' ;  
+             for(i = 1; i < arr.length; i++) {
+                  out += ' <div class= "event"> <h1> ' + arr[i].year + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].description + '</div>  <a href = "' + arr[i].link + '">More Info </a> </div>';
+              }
+              document.getElementById("timeline").innerHTML = out;
+          }
       }
+      function resetPage(){
+          document.getElementById("timeline").innerHTML = '';
+      }
+       
     </script>
   </body>
 </html>

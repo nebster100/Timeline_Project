@@ -11,20 +11,22 @@
   height: 10em;
 }
 #Top *{
+    display: inline;
+    background-color: rgba(0, 0, 0, 0);
+}
+#Top button{
   background-color: white;
-  display: inline;
   margin: 3em 5em 3em 5em;
-}
-
-.dropdown{
-  margin-right: 15em;
-  width: 10em;
-  height: 4em;
-}
-button{
   width: 8em;
   height: 3em;
 }
+#Top .dropdown{
+  background-color: white;
+  margin: 3em 5em 3em 5em; 
+  width: 10em;
+  height: 4em;
+}
+
 #timeline {
   margin: 0px auto;
   max-width: 80em;
