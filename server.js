@@ -10,11 +10,30 @@ app.use(express.static(__dirname + '/'));
 app.use(bodyParser.json());
 
 app.get('/timeline', function (req,res){
-	res.status(500).send();
+	db.timelineObject.findAll().then(function (tlObjects){
+		var uniqueTLObjects = [];
+		tlObjects.forEach(function (tlObject) {
+			if(isUnique(tlObject, uniqueTLObjects)){
+				uniqueTLObjects.push(tlObject);
+			}
+		});
+		res.status(200).json(uniqueTLObjects);
+	}, function (e){
+		res.status(400).json(e);
+	});
 });
 
+function isUnique(tlObj, tlArr){
+	var unique = true;
+	tlArr.forEach(function (tlTest){
+		if(tlTest.timelineName === tlObj.timelineName){
+			unique =  false;
+		}
+	});
+	return unique;
+}
+
 app.get('/timeline/:name', function(req, res) {
-	console.log("hi");
 	var where = {
 		timelineName: req.params.name
 	}

@@ -11,7 +11,6 @@
     <div id = "Top">
 
       <select id="dropdownOne" class = "dropdown" form = "timelineSelector">
-        <option value="Bt">Ben's Timeline</option>
       </select>
       <select id="dropdownTwo" class = "dropdown" form = "timelineSelector">
         <option value="None">None</option>
@@ -23,7 +22,35 @@
 
     </div>
     <h1 style = "text-size: 10em; color: green; text-align: center;"> Use the form on top to pick your timeline </h1>
+ 
+  <script type="text/javascript">
 
+    var xhreq = new XMLHttpRequest();
+    var url = "/timeline";
+
+    xhreq.open("GET", url, true);
+    xhreq.send(); 
+
+    xhreq.onreadystatechange = function() {
+        if (xhreq.readyState == 4 && xhreq.status == 200) {
+            var myArr = JSON.parse(xhreq.responseText);
+            makeDropdown(myArr);
+        }
+    };
+
+    function makeDropdown(arr) {
+
+      var i;
+      var out = '';
+      
+      for(i = 0; i < arr.length; i++) {
+            out += ' <option value = "' + arr[i].timelineName + '">' + arr[i].timelineName + '</option>';
+        }
+
+        document.getElementById("dropdownOne").innerHTML = out;
+    }
+
+    </script>
     <script>
       function changePage(){
         var url = "";

@@ -12,7 +12,6 @@
     <div id = "Top">
 
       <select id="dropdownOne" class = "dropdown" form = "timelineSelector">
-        <option value="Bt">Ben's Timeline</option>
       </select>
       <select id="dropdownTwo" class = "dropdown" form = "timelineSelector">
         <option value="None">None</option>
@@ -30,6 +29,37 @@
       <a href = "http://webkinz.com">About us and that Bs will go down here</a>
     </div>
 
+    <!--- Setting Up Dropdowns -->
+
+    <script type="text/javascript">
+
+    var xhreq = new XMLHttpRequest();
+    var url = "/timeline";
+
+    xhreq.open("GET", url, true);
+    xhreq.send(); 
+
+    xhreq.onreadystatechange = function() {
+        if (xhreq.readyState == 4 && xhreq.status == 200) {
+            var myArr = JSON.parse(xhreq.responseText);
+            makeDropdown(myArr);
+        }
+    };
+
+    function makeDropdown(arr) {
+
+      var i;
+      var out = '';
+      
+      for(i = 0; i < arr.length; i++) {
+            out += ' <option value = "' + arr[i].timelineName + '">' + arr[i].timelineName + '</option>';
+        }
+
+        document.getElementById("dropdownOne").innerHTML = out;
+    }
+
+    </script>
+
     <!--- Sourcing Text for Timeline  -->
     <script type="text/javascript">
 
@@ -44,12 +74,12 @@
         if (xhr.readyState == 4 && xhr.status == 200) {
             var myArr = JSON.parse(xhr.responseText);
 
-            myFunction(myArr);
+            makeTimeline(myArr);
         }
     };
 
 
-    function myFunction(arr) {
+    function makeTimeline(arr) {
 
         var i;
         var out = '<div class= "event offset-first"> <h1> ' + arr[0].year + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].description + '</div>  <a href = "' + arr[0].url + '">More Info </a> </div>' ;  
