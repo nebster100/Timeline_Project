@@ -3,9 +3,12 @@ var env = process.env.NODE_ENV || 'development';
 var sequelize;
 
 if (env === 'production') {
-	console.log('hi');
 	sequelize = new Sequelize(process.env.DATABASE_URL, {
-		dialect: 'postgres'
+		dialect: 'postgres',
+		dialectOptions: {
+      	  ssl: true
+   		}
+
 	});
 } else {
 	sequelize = new Sequelize(undefined, undefined, undefined, {
