@@ -6,10 +6,12 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		year: {
 			type: DataTypes.STRING,
-			allowNull: false,
-			validate: {
-				len: [1, 7]
-			}
+			allowNull: false
+		},
+		nameTitle: {
+			type: DataTypes.STRING,
+			allowNull: false
+
 		},
 		description: {
 			type: DataTypes.STRING(2000),

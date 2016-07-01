@@ -48,7 +48,7 @@ app.get('/timeline/:name', function(req, res) {
 });
 
 app.post('/timeline', function (req,res){
-	var body = _.pick(req.body, 'timelineName', 'year', 'description', 'link', 'img');
+	var body = _.pick(req.body, 'timelineName', 'nameTitle', 'year', 'description', 'link', 'img');
 	
 	db.timelineObject.create(body).then(function (tlObject){
 		res.json(tlObject.toJSON());
