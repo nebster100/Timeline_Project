@@ -2,9 +2,13 @@
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>Historical Timeline V0.0.08</title>
+    <title>Historical Timeline V0.0.09</title>
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/timelineWhole.css">
+    <link rel="stylesheet" href="css/timelineHalf.css">
+    <link rel="stylesheet" href="css/timelineThird.css">
+
   </head>
 
   <body>
@@ -13,7 +17,7 @@
 
       <select id="dropdownOne" class = "dropdown" form = "timelineSelector">
       </select>
-      <select id="dropdownTwo" class = "dropdown" form = "timelineSelector">
+        <select id="dropdownTwo" class = "dropdown" form = "timelineSelector">
         <option value="None">None</option>
       </select>
       <select id="dropdownThree" class = "dropdown" form = "timelineSelector">
@@ -100,11 +104,16 @@
        function makeTimeline(arr) {
 
         var i;
-        var out = '<div class= "event offset-first"> <h1> ' + arr[0].year + '</h1><h1 class = "title"> ' + arr[0].nameTitle + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].description + '</div>  <a href = "' + arr[0].url + '">More Info </a> </div>' ;  
+        //Extra Shit
+        var out = '<div class = "whole">';
+
+        //real
+        out += '<div class= "event offset-first"> <h1> ' + arr[0].year + '</h1><h1 class = "name"> ' + arr[0].nameTitle + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].description + '</div>  <a href = "' + arr[0].url + '">More Info </a> </div>' ;  
              for(i = 1; i < arr.length; i++) {
-                  out += ' <div class= "event"> <h1> ' + arr[i].year + '</h1><h1 class = "title"> ' + arr[i].nameTitle + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].description + '</div>  <a href = "' + arr[i].link + '">More Info </a> </div>';
+                  out += ' <div class= "event"> <h1> ' + arr[i].year + '</h1><h1 class = "name"> ' + arr[i].nameTitle + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].description + '</div>  <a href = "' + arr[i].link + '">More Info </a> </div>';
               }
-              document.getElementById("timeline").innerHTML = out;
+          out += '</div>';
+            document.getElementById("timeline").innerHTML = out;
           }
       }
       function resetPage(){
