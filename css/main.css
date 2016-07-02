@@ -1,0 +1,74 @@
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body{
+    background: url(oldmap.png);
+    height: 100%;
+}
+#overlay{
+    min-height: 60em;
+    background: rgba(0,0,80,.6);
+}
+
+#Top{	
+  background-color: rgb(80,80,80);
+  border-bottom: .2em solid blue;
+  width: 100%;
+  height: 10em;
+}
+#Top *{
+    display: inline;
+    background-color: rgba(0, 0, 0, 0);
+}
+#Top button{
+  background-color: white;
+  margin: 3em 5em 3em 5em;
+  width: 8em;
+  height: 3em;
+}
+#Top .dropdown{
+  background-color: white;
+  margin: 3em 5em 3em 5em; 
+  width: 10em;
+  height: 4em;
+}
+.event h1{
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  text-align: right;
+}
+.event:nth-of-type(2n) h1{
+  text-align: left;
+}
+.event .name{
+  background-color: rgba(0, 0, 0, 0);
+  border-bottom: .1em solid white;
+  text-align: left;
+}
+
+a{
+  color: white;
+}
+a:hover{
+  color: red;
+}
+a:visited{
+  color: red;
+}
+#footer{
+  background: rgb(80,80,80);
+  padding: 2em;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+}
+#footer a, a:hover, a:visited{
+  color: white;
+  border: .1em solid gray;
+  margin-right: 10em;
+  padding: 1.3em;
+  display: inline;
+}

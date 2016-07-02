@@ -1,0 +1,93 @@
+#timeline .third{
+  margin: 0px auto;
+  margin-right: 4%;
+  width: 29%;
+  overflow: hidden;
+  height: auto;
+  position: relative;
+  display: inline-block;
+  padding: 0px;
+  list-style-type: none;
+  background: url(tLine.png);
+  background-size: 1em;
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  margin-bottom: 15em;
+}
+#timeline .third:nth-of-type(1){
+  margin-left: 2.5%;
+}
+#timeline .third:nth-of-type(5){
+  margin-right: 2.5%;
+}
+.dividerthird{
+  position: absolute;
+  top: 10em;
+  height: 130%;
+  width: 1em;
+  right: 33%;
+  background: black;
+}
+.third h1{
+  font-size: 16pt;
+}
+.dividerthird:nth-child(2){
+  right: 0;
+  left: 33%;
+}
+.third .event {
+  position: relative;
+  text-align: left;
+  float: left;
+  clear: left;
+  width: 47%;
+  margin: 10% 0em 0em 0em;
+  border-radius: 5px;
+  display: block;
+  padding: 2%;
+  padding-right: 5%;
+  background-color: rgba(0,0,0,.3);
+  z-index: 15;
+  border: 1px solid blue;
+  text-decoration: none;
+  height: 26em;
+  overflow: hidden;
+  -webkit-transition: background .15s linear;
+  -moz-transition: background .15s linear;
+  -ms-transition: background .15s linear;
+  -o-transition: background .15s linear;
+  transition: background .15s linear;
+}
+.third .offset-first{
+  top: 0;
+  margin-top: 2em;
+}
+.third .event:nth-of-type(2n) {
+  float: right;
+  clear: right;
+}
+.third .event .Text{
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  float: left;
+  width: 60%;
+  min-height: 15em;
+}
+.third .event img{
+  margin: 0em 0em 1.5em 0px;
+  max-width: 4em;
+  max-height: 5em;
+  float: right;
+}
+.third .event:hover{
+ /* padding-right: 2.75%;*/
+  overflow-y: scroll;
+  background-color: rgba(255,0,0,.2);
+}
+.third .event a{
+  float: right;
+  position: relative;
+  text-align: center;
+  margin-right: 1em;
+  margin-top: 4em;
+}
