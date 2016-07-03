@@ -13,20 +13,13 @@
   background-repeat: repeat-y;
   background-position: 50% 0;
   margin-bottom: 15em;
+  vertical-align: top;
 }
 #timeline .third:nth-of-type(1){
   margin-left: 2.5%;
 }
 #timeline .third:nth-of-type(5){
   margin-right: 2.5%;
-}
-.dividerthird{
-  position: absolute;
-  top: 10em;
-  height: 130%;
-  width: 1em;
-  right: 33%;
-  background: black;
 }
 .third h1{
   font-size: 16pt;
@@ -41,7 +34,7 @@
   float: left;
   clear: left;
   width: 47%;
-  margin: 10% 0em 0em 0em;
+  margin: 8em 0em 0em 0em;
   border-radius: 5px;
   display: block;
   padding: 2%;

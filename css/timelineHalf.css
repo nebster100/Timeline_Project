@@ -1,10 +1,10 @@
 #timeline .half{
   margin: 0px auto;
-  margin-left: 4%;
+  margin-left: 6%;
   width: 40%;
   overflow: hidden;
   height: auto;
-  position: relative;
+  position: static;
   display: inline-block;
   padding: 0px;
   list-style-type: none;
@@ -13,20 +13,12 @@
   background-repeat: repeat-y;
   background-position: 50% 0;
   margin-bottom: 15em;
+  vertical-align: top;
 }
 #timeline .half:nth-child(1){
-  margin-left: 4%;
-  margin-right: 8%;
+  margin-right: 2%;
 }
-.dividerhalf{
-  position: absolute;
-  top: 10em;
-  height: 130%;
-  width: 1em;
-  right: 50%;
-  background: black;
-}
-.third h1{
+.half h1{
   font-size: 18pt;
 }
 .half .event {
@@ -35,7 +27,7 @@
   float: left;
   clear: left;
   width: 47%;
-  margin: 10% 0em 0em 0em;
+  margin: 8em 0em 0em 0em;
   border-radius: 5px;
   display: block;
   padding: 2%;

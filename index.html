@@ -17,11 +17,9 @@
 
       <select id="dropdownOne" class = "dropdown" form = "timelineSelector">
       </select>
-        <select id="dropdownTwo" class = "dropdown" form = "timelineSelector">
-        <option value="None">None</option>
+      <select id="dropdownTwo" class = "dropdown" form = "timelineSelector">
       </select>
       <select id="dropdownThree" class = "dropdown" form = "timelineSelector">
-        <option value="None">None</option>
       </select>
       <div id = "Buttons">
           <button type = "button" id = "submit" onclick = "changePage()"> Submit </button>
@@ -62,50 +60,62 @@
             out += ' <option value = "' + arr[i].timelineName + '">' + arr[i].timelineName + '</option>';
         }
         document.getElementById("dropdownOne").innerHTML = out;
+        var revisedOut = '<option value="None">None</option>' + out;
+        document.getElementById("dropdownTwo").innerHTML = revisedOut;
+        document.getElementById("dropdownThree").innerHTML = revisedOut;
     }
     </script>
 
 
     <script>
       function changePage(){
-        var url = "timeline/";
+        var numberOfTimelines = 1;
         var one = document.getElementById("dropdownOne");
         one = one.options[one.selectedIndex].value;
+
         var two = document.getElementById("dropdownTwo");
         two = two.options[two.selectedIndex].value;
-        var three = document.getElementById("dropdownTwo");
+        if(two != "None" && two != one)
+          numberOfTimelines++;
+
+        var three = document.getElementById("dropdownThree");
         three = three.options[three.selectedIndex].value;
-        
-        if(one != "None")
-          url += one;
-        if(two != "None")
-          url += two;
-        if(three != "None")
-          url += three;
+        if(three != "None" && three != two && three != one)
+          numberOfTimelines++;
 
-        if(url != "timeline/"){
-            document.getElementById("Buttons").innerHTML = '<button type = "button" id = "submit" onclick = "changePage()"> Submit </button><button type = "button" id = "reset" onclick = "resetPage()"> Reset </button>';
-        }
+        var format;
+        if(numberOfTimelines == 1)
+          format = "whole";
+        else if(numberOfTimelines == 2)
+          format = "half";
+        else if(numberOfTimelines == 3)
+          format = "third";
 
+        requestTimeline(one, format, true);
+        if(two != "None" && two != one)
+          requestTimeline(two, format, false);
+        if(three != "None" && three != two && three != one)
+          requestTimeline(three, format, false);
 
+      }
+
+      function requestTimeline(ext, format, reset){
+        var url = "timeline/" + ext;
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", url, true);
-        xhr.send(); 
+        xhr.open("GET", url, false);
+        xhr.send(null); 
 
+        if (xhr.status == 200) {
+            var myArr = JSON.parse(xhr.responseText);
+            makeTimeline(myArr, format, reset);
+        }
+      }
 
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var myArr = JSON.parse(xhr.responseText);
-
-                makeTimeline(myArr);
-            }
-        };
-
-       function makeTimeline(arr) {
-
+      function makeTimeline(arr, format, reset) {
         var i;
-        //Extra Shit
-        var out = '<div class = "whole">';
+        var out;
+
+        out = '<div class = "' + format  + '">';
 
         //real
         out += '<div class= "event offset-first"> <h1> ' + arr[0].year + '</h1><h1 class = "name"> ' + arr[0].nameTitle + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].description + '</div>  <a href = "' + arr[0].url + '">More Info </a> </div>' ;  
@@ -113,7 +123,10 @@
                   out += ' <div class= "event"> <h1> ' + arr[i].year + '</h1><h1 class = "name"> ' + arr[i].nameTitle + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].description + '</div>  <a href = "' + arr[i].link + '">More Info </a> </div>';
               }
           out += '</div>';
+          if(reset)
             document.getElementById("timeline").innerHTML = out;
+          else{
+            document.getElementById("timeline").innerHTML += out;
           }
       }
       function resetPage(){
