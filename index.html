@@ -12,7 +12,6 @@
   </head>
 
   <body>
-    <div id = "overlay">
     <div id = "Top">
 
       <select id="dropdownOne" class = "dropdown" form = "timelineSelector">
@@ -23,11 +22,12 @@
       </select>
       <div id = "Buttons">
           <button type = "button" id = "submit" onclick = "changePage()"> Submit </button>
+          <button type = "button" id = "reset" onclick = "resetPage()"> Reset </button>
       </div>
 
     </div>
-
     <div id = "timeline">
+        <div class = "overlay"></div>
     </div>
     <div id = "footer">
       <a href = "/">Home</a>
@@ -35,8 +35,6 @@
       <a href = "/contactUs.html">Contact Us</a>
       <a href = "/Donate.html">Donate</a>
     </div>
-
-  </div>
 
 
 
@@ -91,15 +89,27 @@
         else if(numberOfTimelines == 3)
           format = "third";
 
-        requestTimeline(one, format, true);
-        if(two != "None" && two != one)
-          requestTimeline(two, format, false);
-        if(three != "None" && three != two && three != one)
-          requestTimeline(three, format, false);
+        var color = getColor();
+        requestTimeline(one, format, true, color);
 
+
+        if(two != "None" && two != one){
+          var newColor = getColor();
+          while(color == newColor)
+             newColor = getColor();
+          color = newColor;
+          requestTimeline(two, format, false, color);
+        }
+        if(three != "None" && three != two && three != one){
+          var newColor = getColor();
+          while(color == newColor)
+             newColor = getColor();
+          color = newColor;
+          requestTimeline(three, format, false, color);
+        }
       }
 
-      function requestTimeline(ext, format, reset){
+      function requestTimeline(ext, format, reset, color){
         var url = "timeline/" + ext;
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url, false);
@@ -107,30 +117,49 @@
 
         if (xhr.status == 200) {
             var myArr = JSON.parse(xhr.responseText);
-            makeTimeline(myArr, format, reset);
+            makeTimeline(myArr, format, reset, color);
         }
       }
 
-      function makeTimeline(arr, format, reset) {
+      function makeTimeline(arr, format, reset, color) {
         var i;
         var out;
 
-        out = '<div class = "' + format  + '">';
+        out = '<div class = "overlay' + format + ' color' + color +'"><div class = "' + format + '">';
 
         //real
         out += '<div class= "event offset-first"> <h1> ' + arr[0].year + '</h1><h1 class = "name"> ' + arr[0].nameTitle + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].description + '</div>  <a href = "' + arr[0].url + '">More Info </a> </div>' ;  
              for(i = 1; i < arr.length; i++) {
                   out += ' <div class= "event"> <h1> ' + arr[i].year + '</h1><h1 class = "name"> ' + arr[i].nameTitle + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].description + '</div>  <a href = "' + arr[i].link + '">More Info </a> </div>';
               }
-          out += '</div>';
+          out += '</div></div>';
           if(reset)
             document.getElementById("timeline").innerHTML = out;
           else{
             document.getElementById("timeline").innerHTML += out;
           }
       }
+
+      function getColor(){
+        var number = Math.floor((Math.random() * 6) + 1);
+        var color;
+        if(number == 1)
+          color = "red";
+        else if(number == 2)
+          color = "orange";
+        else if(number == 3)
+          color = "yellow";
+        else if(number == 4)
+          color = "green";
+        else if(number == 5)
+          color = "blue";
+        else if(number == 6)
+          color = "purple";
+        return color;
+      }
+
       function resetPage(){
-          document.getElementById("timeline").innerHTML = '';
+          document.getElementById("timeline").innerHTML = '<div class = "overlay"></div>';
       }
        
     </script>

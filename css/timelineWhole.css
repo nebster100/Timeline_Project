@@ -6,11 +6,11 @@
   position: relative;
   padding: 0px;
   list-style-type: none;
-  background: url(tLine.png);
+  background-image: url(tLine.png);
   background-size: 2em;
   background-repeat: repeat-y;
   background-position: 50% 0;
-  margin-bottom: 15em;
+  padding-bottom: 15em;
 }
 .whole .event {
   position: relative;
@@ -24,7 +24,6 @@
   padding: .5%;
   background-color: rgba(0,0,0,.3);
   z-index: 15;
-  border: 1px solid blue;
   text-decoration: none;
   height: 25em;
   overflow: hidden;
@@ -64,4 +63,7 @@
   position: relative;
   text-align: center;
   margin-right: 5em;
+}
+.overlaywhole{
+  width: 100%;
 }

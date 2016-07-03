@@ -1,7 +1,7 @@
 #timeline .third{
   margin: 0px auto;
   margin-right: 4%;
-  width: 29%;
+  width: 33em;
   overflow: hidden;
   height: auto;
   position: relative;
@@ -41,7 +41,6 @@
   padding-right: 5%;
   background-color: rgba(0,0,0,.3);
   z-index: 15;
-  border: 1px solid blue;
   text-decoration: none;
   height: 26em;
   overflow: hidden;
@@ -83,4 +82,8 @@
   text-align: center;
   margin-right: 1em;
   margin-top: 4em;
+}
+.overlaythird{
+  display: inline-block;
+  width: 33.33333333333%;
 }

@@ -8,14 +8,10 @@ body{
     background: url(oldmap.png);
     height: 100%;
 }
-#overlay{
-    min-height: 60em;
-    background: rgba(0,0,80,.6);
-}
 
 #Top{	
   background-color: rgb(80,80,80);
-  border-bottom: .2em solid blue;
+  border-bottom: .2em solid black;
   width: 100%;
   height: 10em;
 }
@@ -35,6 +31,48 @@ body{
   width: 10em;
   height: 4em;
 }
+.overlay{
+    background: rgba(0,0,0,0);
+    min-height: 60em;
+}
+.colorred{
+  background: rgba(80,0,0,.6);
+}
+.colororange{
+  background: rgba(153,80,0,.6);
+}
+.coloryellow{
+  background: rgba(102,102,0,.6);
+}
+.colorgreen{
+  background: rgba(0,80,0,.6);
+}
+.colorblue{
+  background: rgba(0,0,80,.6);
+}
+.colorpurple{
+  background: rgba(102,0,102,.6);
+}
+
+.colorred .event{
+  border: 1px solid rgb(255,0,0);
+}
+.colororange .event{
+  border: 1px solid rgb(255,128,0);
+}
+.coloryellow .event{
+  border: 1px solid rgb(255,255,0);
+}
+.colorgreen .event{
+  border: 1px solid rgb(0,255,0);
+}
+.colorblue .event{
+  border: 1px solid rgb(0,0,255);
+}
+.colorpurple .event {
+  border: 1px solid rgb(153,0,153);
+}
+
 .event h1{
   color: white;
   background-color: rgba(0, 0, 0, 0);
@@ -47,6 +85,24 @@ body{
   background-color: rgba(0, 0, 0, 0);
   border-bottom: .1em solid white;
   text-align: left;
+}
+.colorred .event:hover{
+  background: rgba(0,0,255,.2);
+}
+.colororange .event:hover{
+  background: rgba(255,0,0,.2);
+}
+.coloryellow .event:hover{
+  background: rgba(255,0,0,.2);
+}
+.colorgreen .event:hover{
+  background: rgba(255,0,255,.2);
+}
+.colorblue .event:hover{
+  background: rgba(255,0,0,.2);
+}
+.colorpurple .event:hover{
+  background: rgba(0,255,0,.2);
 }
 a{
   color: white;
