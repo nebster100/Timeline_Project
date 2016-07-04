@@ -65,9 +65,7 @@
   float: right;
 }
 .half .event:hover{
- /* padding-right: 2.75%;*/
   overflow-y: scroll;
-  background-color: rgba(255,0,0,.2);
 }
 .half .event a{
   float: right;

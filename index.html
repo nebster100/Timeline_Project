@@ -128,7 +128,7 @@
         out = '<div class = "overlay' + format + ' color' + color +'"><div class = "' + format + '">';
 
         //real
-        out += '<div class= "event offset-first"> <h1> ' + arr[0].year + '</h1><h1 class = "name"> ' + arr[0].nameTitle + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].description + '</div>  <a href = "' + arr[0].url + '">More Info </a> </div>' ;  
+        out += '<div class= "event offset-first"> <h1> ' + arr[0].year + '</h1><h1 class = "name"> ' + arr[0].nameTitle + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].description + '</div>  <a href = "' + arr[0].link + '">More Info </a> </div>' ;  
              for(i = 1; i < arr.length; i++) {
                   out += ' <div class= "event"> <h1> ' + arr[i].year + '</h1><h1 class = "name"> ' + arr[i].nameTitle + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].description + '</div>  <a href = "' + arr[i].link + '">More Info </a> </div>';
               }

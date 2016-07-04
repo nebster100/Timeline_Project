@@ -55,7 +55,6 @@
 }
 .whole .event:hover{
   min-height: 25em;
-  background-color: rgba(255,0,0,.2);
   height: auto;
 }
 .whole .event a{
