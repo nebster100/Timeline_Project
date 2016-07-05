@@ -4,9 +4,55 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		year: {
-			type: DataTypes.STRING,
+		startYear: {
+			type: DataTypes.INTEGER,
+			validate: {
+				len: [1,4]
+			},
 			allowNull: false
+		},
+		endYear: {
+			type: DataTypes.INTEGER,
+			validate: {
+				len: [1,4]
+			},
+			allowNull: true
+		},
+		startMonth: {
+			type: DataTypes.INTEGER,
+			validate: {
+				len: [1,2],
+				min: 1,
+				max: 12
+			},
+			allowNull: true
+		},
+		endMonth: {
+			type: DataTypes.INTEGER,
+			validate: {
+				len: [1,2],
+				min: 1,
+				max: 12
+			},
+			allowNull: true
+		},
+		startDay: {
+			type: DataTypes.INTEGER,
+			validate: {
+				len: [1,2],
+				min: 1,
+				max: 31
+			},
+			allowNull: true
+		},
+		endDay: {
+			type: DataTypes.INTEGER,
+			validate: {
+				len: [1,2],
+				min: 1,
+				max: 31
+			},
+			allowNull: true
 		},
 		nameTitle: {
 			type: DataTypes.STRING,

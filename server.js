@@ -39,7 +39,12 @@ app.get('/timeline/:name', function(req, res) {
 	}
 
 	db.timelineObject.findAll({
-		where: where
+		where: where,
+		order: [
+			['startYear', 'ASC'],
+			['startMonth', 'ASC'],
+			['startDay', 'ASC']
+		]
 	}).then(function (tlObjects){
 		res.json(tlObjects);
 	}, function(e){
@@ -48,8 +53,9 @@ app.get('/timeline/:name', function(req, res) {
 });
 
 app.post('/timeline', function (req,res){
-	var body = _.pick(req.body, 'timelineName', 'nameTitle', 'year', 'description', 'link', 'img');
-	
+	var body = _.pick(req.body, 'timelineName', 'nameTitle', 'startYear', 'endYear',
+	'startMonth','endMonth','startDay','endDay', 'description', 'link', 'img');
+
 	db.timelineObject.create(body).then(function (tlObject){
 		res.json(tlObject.toJSON());
 	}, function (e){

@@ -134,12 +134,13 @@
 
       function makeTimeline(arr, format, reset, color, dHeight) {
         var out = '<div class = "overlay' + format + ' color' + color + '"><div class = "' + format + '">';
-        //real
-        out += '<div class= "event offset-first"> <h1> ' + arr[0].year + '</h1><h1 class = "name"> ' + arr[0].nameTitle + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].description + '</div>  <a href = "' + arr[0].link + '">More Info </a> </div>' ;  
+
+        arr = makeDates(arr);
+        out += '<div class= "event offset-first"> <h1> ' + arr[0].startDate + ' - ' + arr[0].endDate + '</h1><h1 class = "name"> ' + arr[0].nameTitle + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].description + '</div>  <a href = "' + arr[0].link + '">More Info </a> </div>' ;  
 
          var i;
          for(i = 1; i < arr.length; i++) {
-            out += ' <div class= "event"> <h1> ' + arr[i].year + '</h1><h1 class = "name"> ' + arr[i].nameTitle + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].description + '</div>  <a href = "' + arr[i].link + '">More Info </a> </div>';
+            out += ' <div class= "event"> <h1> ' + arr[i].startDate + ' - ' + arr[i].endDate + '</h1><h1 class = "name"> ' + arr[i].nameTitle + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].description + '</div>  <a href = "' + arr[i].link + '">More Info </a> </div>';
           }
           out += '</div></div>';
           if(reset)
@@ -155,6 +156,64 @@
           return document.getElementsByClassName('color' + color)[0].offsetHeight;;
       }
 
+      function makeDates(arr){
+        var i, date;
+        for(i = 0; i < arr.length; i++){
+          date = '';
+          if(typeof arr[i].startMonth === 'number'){
+            date += toMonth(arr[i].startMonth) + ' ';
+            if(typeof arr[i].startDay === 'number')
+              date += arr[i].startDay + ' ';
+          }
+          if(arr[i].startYear < 0)
+            arr[i].startYear = -1 * arr[i].startYear + ' BC';
+          date += arr[i].startYear;
+          arr[i].startDate = date;
+
+          date = '';
+
+          if(typeof arr[i].endMonth === 'number'){
+            date += toMonth(arr[i].endMonth) + ' ';
+            if(typeof arr[i].endDay === 'number')
+              date += arr[i].endDay + ' ';
+          }
+          if(arr[i].endYear < 0)
+            arr[i].endYear = -1 * arr[i].endYear + ' BC';
+          date += arr[i].endYear;
+
+          arr[i].endDate = date;
+
+        }
+        return arr;
+      }
+
+      function toMonth(month){
+        if(month == 1)
+          return 'Jan';
+        if(month == 2)
+          return 'Feb';
+        if(month == 3)
+          return 'Mar';
+        if(month == 4)
+          return 'Apr';
+        if(month == 5)
+          return 'May';
+        if(month == 6)
+          return 'Jun';
+        if(month == 7)
+          return 'Jul';
+        if(month == 8)
+          return 'Aug';
+        if(month == 9)
+          return 'Sep';
+        if(month == 10)
+          return 'Oct';
+        if(month == 11)
+          return 'Nov';
+        if(month == 12)
+          return 'Dec';
+        return 'whoops';
+      }
       function getColor(){
         var number = Math.floor((Math.random() * 6) + 1);
         var color;
