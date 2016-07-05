@@ -1,6 +1,6 @@
 #timeline .whole{
   margin: 0px auto;
-  width: 80em;
+  width: 95%;
   overflow: hidden;
   height: auto;
   position: relative;
@@ -17,7 +17,7 @@
   text-align: left;
   float: left;
   clear: left;
-  width: 43%;
+  width: 46%;
   margin: 8em 0em 1.25% 0em;
   border-radius: 5px;
   display: block;
@@ -49,13 +49,12 @@
 }
 .whole .event img{
   margin: 0px 3em 3em 0px;
-  max-width: 10em;
-  max-height: 10em;
+  max-width: 25%;
+  max-height: 40%;
   float: right;
 }
 .whole .event:hover{
-  min-height: 25em;
-  height: auto;
+    overflow-y: scroll; 
 }
 .whole .event a{
   float: right;

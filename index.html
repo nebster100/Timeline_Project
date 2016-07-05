@@ -2,7 +2,7 @@
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>Historical Timeline V0.0.09</title>
+    <title>Historical Timeline V0.0.1</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/timelineWhole.css">
@@ -34,6 +34,9 @@
       <a href = "/aboutUs.html">About us</a>
       <a href = "/contactUs.html">Contact Us</a>
       <a href = "/Donate.html">Donate</a>
+      <div id = "footerSpace"> </div>
+      <p>© 2016, Benjamin Eisenberg<p>
+      <p>All rights reserved. No parts of this application may be reproduced, stored, shared, or transmitted in any manner whatsoever without prior written permission from the creator</p>
     </div>
 
 
@@ -90,7 +93,7 @@
           format = "third";
 
         var color = getColor();
-        requestTimeline(one, format, true, color);
+        var largestHeight = requestTimeline(one, format, true, color, 0);
 
 
         if(two != "None" && two != one){
@@ -98,46 +101,53 @@
           while(color == newColor)
              newColor = getColor();
           color = newColor;
-          requestTimeline(two, format, false, color);
+          var otherHeight = requestTimeline(two, format, false, color, largestHeight);
+          if(otherHeight > largestHeight)
+            largestHeight = otherHeight;
         }
         if(three != "None" && three != two && three != one){
           var newColor = getColor();
           while(color == newColor)
              newColor = getColor();
           color = newColor;
-          requestTimeline(three, format, false, color);
+          requestTimeline(three, format, false, color, largestHeight);
         }
       }
 
-      function requestTimeline(ext, format, reset, color){
+      function requestTimeline(ext, format, reset, color, dHeight){
         var url = "timeline/" + ext;
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url, false);
         xhr.send(null); 
-
+        var height = 10;
         if (xhr.status == 200) {
             var myArr = JSON.parse(xhr.responseText);
-            makeTimeline(myArr, format, reset, color);
+            dHeight = makeTimeline(myArr, format, reset, color, dHeight);
         }
+        return dHeight;
       }
 
-      function makeTimeline(arr, format, reset, color) {
-        var i;
-        var out;
-
-        out = '<div class = "overlay' + format + ' color' + color +'"><div class = "' + format + '">';
-
+      function makeTimeline(arr, format, reset, color, dHeight) {
+        var out = '<div class = "overlay' + format + ' color' + color + '"><div class = "' + format + '">';
         //real
         out += '<div class= "event offset-first"> <h1> ' + arr[0].year + '</h1><h1 class = "name"> ' + arr[0].nameTitle + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].description + '</div>  <a href = "' + arr[0].link + '">More Info </a> </div>' ;  
-             for(i = 1; i < arr.length; i++) {
-                  out += ' <div class= "event"> <h1> ' + arr[i].year + '</h1><h1 class = "name"> ' + arr[i].nameTitle + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].description + '</div>  <a href = "' + arr[i].link + '">More Info </a> </div>';
-              }
+
+         var i;
+         for(i = 1; i < arr.length; i++) {
+            out += ' <div class= "event"> <h1> ' + arr[i].year + '</h1><h1 class = "name"> ' + arr[i].nameTitle + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].description + '</div>  <a href = "' + arr[i].link + '">More Info </a> </div>';
+          }
           out += '</div></div>';
           if(reset)
             document.getElementById("timeline").innerHTML = out;
           else{
             document.getElementById("timeline").innerHTML += out;
+            if(dHeight < document.getElementsByClassName('color' + color)[0].offsetHeight)
+              dHeight = document.getElementsByClassName('color' + color)[0].offsetHeight;
+            var overlays = document.getElementsByClassName('overlay' + format);
+            for(i = 0; i < overlays.length; i++)
+              overlays[i].style.height = dHeight + "px";
           }
+          return document.getElementsByClassName('color' + color)[0].offsetHeight;;
       }
 
       function getColor(){
