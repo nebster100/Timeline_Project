@@ -16,6 +16,23 @@ a, a:hover, a:visited{
   padding: 1.3em;
   display: inline;
 }
+#homePage{
+  width: 100%;
+  height: 60em;
+  position: relative;
+  padding: 5em 10em 5em 10em;
+}
+#homePage h1{
+  color: black;
+  text-align: center;
+  font-size: 4em;
+}
+#homePage p{
+  color: black;
+  font-size: 2em;
+  text-align: center;
+}
+
 #otherPages{
   width: 100%;
   height: 60em;
@@ -64,7 +81,7 @@ a, a:hover, a:visited{
   height: 45%;
 }
 .overlay{
-    background: rgba(0,0,0,0);
+    background: rgba(255,255,255,.5);
     min-height: 60em;
 }
 .colorred{
