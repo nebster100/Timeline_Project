@@ -7,14 +7,14 @@ module.exports = function(sequelize, DataTypes) {
 		startYear: {
 			type: DataTypes.INTEGER,
 			validate: {
-				len: [1,4]
+				len: [1,5]
 			},
 			allowNull: false
 		},
 		endYear: {
 			type: DataTypes.INTEGER,
 			validate: {
-				len: [1,4]
+				len: [1,5]
 			},
 			allowNull: true
 		},

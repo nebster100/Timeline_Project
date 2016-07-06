@@ -66,6 +66,23 @@ app.post('/timeline', function (req,res){
 	});
 });
 
+app.delete('/timeline/:name/:event', function (req,res){
+	var where = {
+		timelineName: req.params.name,
+		nameTitle: req.params.event
+	}
+	db.timelineObject.destroy({
+		where: where
+	}).then(function (deletedObject){
+		if(deletedObject === 1)
+			res.status(200).json(deletedObject);
+		else
+			res.status(402).send();
+	},function (e){
+		res.status(500).json(e);
+	});
+});
+
 db.sequelize.sync().then(function() {
 	app.listen(PORT, function() {
 		console.log('Express listening on port ' + PORT + '!');

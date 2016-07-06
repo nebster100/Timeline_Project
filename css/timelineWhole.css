@@ -1,50 +1,16 @@
 #timeline .whole{
-  margin: 0px auto;
   width: 95%;
-  overflow: hidden;
-  height: auto;
-  position: relative;
-  padding: 0px;
+  margin-left: 2.5%;
   list-style-type: none;
-  background-image: url(tLine.png);
-  background-size: 2em;
-  background-repeat: repeat-y;
-  background-position: 50% 0;
-  padding-bottom: 15em;
 }
 .whole .event {
-  position: relative;
-  text-align: left;
-  float: left;
-  clear: left;
-  width: 46%;
-  margin: 8em 0em 1.25% 0em;
-  border-radius: 5px;
-  display: block;
+  margin-bottom: 1.25%;
   padding: .5%;
-  background-color: rgba(0,0,0,.3);
-  z-index: 15;
-  text-decoration: none;
   height: 25em;
-  overflow: hidden;
-  -webkit-transition: background .15s linear;
-  -moz-transition: background .15s linear;
-  -ms-transition: background .15s linear;
-  -o-transition: background .15s linear;
-  transition: background .15s linear;
-}
-.whole .event:nth-of-type(2n) {
-  float: right;
-  clear: right;
-}
-.whole .offset-first{
-  margin-top: 2em;
 }
 .whole .event .Text{
-  background-color: rgba(0, 0, 0, 0);
-  color: white;
-  float: left;
-  width: 65%;
+  font-size: 14pt;
+  width: 70%;
   min-height: 15em;
 }
 .whole .event img{

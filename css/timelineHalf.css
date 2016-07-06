@@ -1,17 +1,7 @@
 #timeline .half{
-  margin: 0px auto;
   margin-left: 6%;
   width: 88%;
-  overflow: hidden;
-  height: auto;
-  position: static;
   display: inline-block;
-  padding: 0px;
-  list-style-type: none;
-  background: url(tLine.png);
-  background-size: 2em;
-  background-repeat: repeat-y;
-  background-position: 50% 0;
   margin-bottom: 15em;
   vertical-align: top;
 }
@@ -22,40 +12,11 @@
   font-size: 18pt;
 }
 .half .event {
-  position: relative;
-  text-align: left;
-  float: left;
-  clear: left;
-  width: 47%;
-  margin: 8em 0em 0em 0em;
-  border-radius: 5px;
-  display: block;
   padding: 2%;
   padding-right: 5%;
-  background-color: rgba(0,0,0,.3);
-  z-index: 15;
-  text-decoration: none;
   height: 26em;
-  overflow: hidden;
-  -webkit-transition: background .15s linear;
-  -moz-transition: background .15s linear;
-  -ms-transition: background .15s linear;
-  -o-transition: background .15s linear;
-  transition: background .15s linear;
-}
-.half .offset-first{
-  top: 0;
-  margin-top: 2em;
-}
-.half .event:nth-of-type(2n) {
-  float: right;
-  clear: right;
 }
 .half .event .Text{
-  background-color: rgba(0, 0, 0, 0);
-  color: white;
-  float: left;
-  width: 60%;
   min-height: 15em;
 }
 .half .event img{
