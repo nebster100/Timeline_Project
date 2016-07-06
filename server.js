@@ -74,10 +74,10 @@ app.delete('/timeline/:name/:event', function (req,res){
 	db.timelineObject.destroy({
 		where: where
 	}).then(function (deletedObject){
-		if(deletedObject === 1)
+		if(deletedObject >= 1)
 			res.status(200).json(deletedObject);
 		else
-			res.status(402).send();
+			res.status(404).send();
 	},function (e){
 		res.status(500).json(e);
 	});
