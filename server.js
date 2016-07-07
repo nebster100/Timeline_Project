@@ -66,6 +66,29 @@ app.post('/timeline', function (req,res){
 	});
 });
 
+app.put('/timeline/:name/:event', function (req,res){
+	var where = {
+		timelineName: req.params.name,
+		nameTitle: req.params.event
+	};
+	var body = _.pick(req.body, 'nameTitle', 'startYear', 'endYear',
+	'startMonth','endMonth','startDay','endDay', 'description', 'link', 'img');
+
+	db.timelineObject.findOne({
+		where: where
+	}).then(function (timelineObject){
+		if(timelineObject)
+			timelineObject.update(body).then(function (timelineObject){
+				res.json(timelineObject.toJSON());
+			}, function (e){
+				res.status(400).json(e);
+			});
+		else
+			res.status(404).send();
+	});
+
+});
+
 app.delete('/timeline/:name/:event', function (req,res){
 	var where = {
 		timelineName: req.params.name,
