@@ -87,31 +87,52 @@ a, a:hover, a:visited{
   display: inline-block;
   padding: 0px;
   list-style-type: none;
-  background: url(tLine.png);
+}
+
+.overlay{
+  background: rgba(255,255,255,.5);
+}
+.colorred{
+  background: url(timelineTextureRed.png);
   background-size: 2em;
   background-repeat: repeat-y;
   background-position: 50% 0;
-}
-.overlay{
-    background: rgba(255,255,255,.5);
-}
-.colorred{
-  background: rgba(80,0,0,.6);
+  background-color: rgba(80,0,0,.6);
 }
 .colororange{
-  background: rgba(153,80,0,.6);
+  background: url(timelineTextureYellow.png);
+  background-size: 2em;
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  background-color: rgba(153,80,0,.6);
 }
 .coloryellow{
-  background: rgba(102,102,0,.6);
+  background: url(timelineTextureYellow.png);
+  background-size: 2em;
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  background-color: rgba(102,102,0,.6);
 }
 .colorgreen{
-  background: rgba(0,80,0,.6);
+  background: url(timelineTextureGreen.png);
+  background-size: 2em;
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  background-color: rgba(0,80,0,.6);
 }
 .colorblue{
-  background: rgba(0,0,80,.6);
+  background: url(timelineTextureBlue.png);
+  background-size: 2em;
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  background-color: rgba(0,0,80,.6);
 }
 .colorpurple{
-  background: rgba(102,0,102,.6);
+  background: url(timelineTexturePurple.png);
+  background-size: 2em;
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  background-color: rgba(102,0,102,.6);
 }
 
 .colorred .event{
