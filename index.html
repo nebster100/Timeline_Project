@@ -178,11 +178,13 @@
             if(typeof arr[i].endDay === 'number')
               date += arr[i].endDay + ' ';
           }
-          if(typeof arr[i].endYear != 'number' && date == '')
-            date = 'preset';
           if(arr[i].endYear < 0)
             arr[i].endYear = -1 * arr[i].endYear + ' BC';
-          date += arr[i].endYear;
+
+          if(typeof arr[i].endYear != 'string' && date == '')
+            date = 'preset';
+          else
+            date += arr[i].endYear;
 
           arr[i].endDate = date;
 
