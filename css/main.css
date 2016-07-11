@@ -5,7 +5,7 @@
 }
 
 body{
-    background: url(oldmap.png);
+    background: url(oldmap.jpg);
     height: 100%;
     min-width: 1280px;
 }
@@ -93,42 +93,42 @@ a, a:hover, a:visited{
   background: rgba(255,255,255,.5);
 }
 .colorred{
-  background: url(timelineTextureRed.png);
+  background: url(timelineTextureRed.jpg);
   background-size: 2em;
   background-repeat: repeat-y;
   background-position: 50% 0;
   background-color: rgba(80,0,0,.6);
 }
 .colororange{
-  background: url(timelineTextureYellow.png);
+  background: url(timelineTextureYellow.jpg);
   background-size: 2em;
   background-repeat: repeat-y;
   background-position: 50% 0;
   background-color: rgba(153,80,0,.6);
 }
 .coloryellow{
-  background: url(timelineTextureYellow.png);
+  background: url(timelineTextureYellow.jpg);
   background-size: 2em;
   background-repeat: repeat-y;
   background-position: 50% 0;
   background-color: rgba(102,102,0,.6);
 }
 .colorgreen{
-  background: url(timelineTextureGreen.png);
+  background: url(timelineTextureGreen.jpg);
   background-size: 2em;
   background-repeat: repeat-y;
   background-position: 50% 0;
   background-color: rgba(0,80,0,.6);
 }
 .colorblue{
-  background: url(timelineTextureBlue.png);
+  background: url(timelineTextureBlue.jpg);
   background-size: 2em;
   background-repeat: repeat-y;
   background-position: 50% 0;
   background-color: rgba(0,0,80,.6);
 }
 .colorpurple{
-  background: url(timelineTexturePurple.png);
+  background: url(timelineTexturePurple.jpg);
   background-size: 2em;
   background-repeat: repeat-y;
   background-position: 50% 0;
