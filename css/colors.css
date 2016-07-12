@@ -1,0 +1,118 @@
+.colorred{
+  background: url(timelineTextureRed.jpg);
+  background-size: 2em;
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  background-color: rgba(80,0,0,.6);
+}
+.colororange{
+  background: url(timelineTextureOrange.jpg);
+  background-size: 2em;
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  background-color: rgba(153,80,0,.6);
+}
+.coloryellow{
+  background: url(timelineTextureYellow.jpg);
+  background-size: 2em;
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  background-color: rgba(102,102,0,.6);
+}
+.colorgreen{
+  background: url(timelineTextureGreen.jpg);
+  background-size: 2em;
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  background-color: rgba(0,80,0,.6);
+}
+.colorblue{
+  background: url(timelineTextureBlue.jpg);
+  background-size: 2em;
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  background-color: rgba(0,0,80,.6);
+}
+.colorpurple{
+  background: url(timelineTexturePurple.jpg);
+  background-size: 2em;
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  background-color: rgba(102,0,102,.6);
+}
+
+.colorred .event{
+  border: 1px solid rgb(255,0,0);
+}
+.colororange .event{
+  border: 1px solid rgb(255,128,0);
+}
+.coloryellow .event{
+  border: 1px solid rgb(255,255,0);
+}
+.colorgreen .event{
+  border: 1px solid rgb(0,255,0);
+}
+.colorblue .event{
+  border: 1px solid rgb(0,0,255);
+}
+.colorpurple .event {
+  border: 1px solid rgb(153,0,153);
+}
+
+.colorred .event:hover{
+  background: rgba(0,0,255,.2);
+}
+.colororange .event:hover{
+  background: rgba(100,0,0,.2);
+}
+.coloryellow .event:hover{
+  background: rgba(255,0,0,.2);
+}
+.colorgreen .event:hover{
+  background: rgba(255,0,255,.2);
+}
+.colorblue .event:hover{
+  background: rgba(255,0,0,.2);
+}
+.colorpurple .event:hover{
+  background: rgba(0,100,200,.2);
+}
+
+.colorred .event h1{
+  color: #EE0018;
+}
+.colororange .event h1{
+  color: #FD8508;
+}
+.coloryellow .event h1{
+  color: #F8D407;
+}
+.colorgreen .event h1{
+  color: #00B714;
+}
+.colorblue .event h1{
+  color: #008DFF;
+}
+.colorpurple .event h1{
+  color: #E062FF;
+}
+
+.colorred .event .name{
+  border-bottom: .1em solid #A80003;
+}
+.colororange .event .name{
+  border-bottom: .1em solid #DD4508;
+}
+.coloryellow .event .name{
+  border-bottom: .1em solid #D8B407;
+}
+.colorgreen .event .name{
+  border-bottom: .1em solid #00A704;
+}
+.colorblue .event .name{
+  border-bottom: .1em solid #007DDF;
+}
+.colorpurple .event .name{
+  border-bottom: .1em solid #C062DF;
+}

@@ -21,12 +21,6 @@
 .whole .event:hover{
     overflow-y: scroll; 
 }
-.whole .event a{
-  float: right;
-  position: relative;
-  text-align: center;
-  margin-right: 5em;
-}
 .overlaywhole{
   width: 100%;
 }

@@ -22,15 +22,12 @@
   max-height: 8em;
   float: right;
 }
+.half .event a{
+    margin: 0  30% 0 30%;
+}
+
 .half .event:hover{
   overflow-y: scroll;
-}
-.half .event a{
-  float: right;
-  position: relative;
-  text-align: center;
-  margin-right: 1em;
-  margin-top: 4em;
 }
 .overlayhalf{
   display: inline-block;
