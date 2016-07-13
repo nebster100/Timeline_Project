@@ -14,15 +14,24 @@
       <a href = "/contactUs.html">Contact Us</a>
       <a href = "/Donate.html">Donate</a>
     </div>
-    <div id = "otherPages">
-    	<h1>Contact Us</h1>
-    	<p>
-    		NEED TO WRITE THIS AND CREATE FORM/EMAIL
-    	</p>
+    <div id = "otherPages">    
+      <h1>Contact Us</h1>
+      <h3>Use this button to contact us. We'll get back to you as soon as possible. We appreciate suggestions, questions, and critiques! All fields are required!</h3>
+      <div>
+        <button name="submit" type="submit" onclick = "openMail()">Contact Us</button>
+      </div>
+    </div>
+    
    	</div>
     <div id = "footer">
       <p>© 2016, Benjamin Eisenberg<p>
       <p>All rights reserved. No parts of this application may be reproduced, stored, shared, or transmitted in any manner whatsoever without prior written permission from the creator</p>
     </div>
+
+  <script>
+  function openMail(){
+    window.location.href = "mailto:fourthaxishistory@gmail.com?subject=Contact Us";
+   }
+  </script>
   </body>
  </html>
