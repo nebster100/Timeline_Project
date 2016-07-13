@@ -34,7 +34,6 @@ a, a:hover, a:visited{
   font-size: 2em;
   text-align: center;
 }
-
 #otherPages{
   width: 100%;
   min-height: 60em;
@@ -58,6 +57,14 @@ a, a:hover, a:visited{
   font-size: 4em;
   border-bottom: .05em solid #019454;
 }
+#otherPages h2{
+  margin-top: 3em;
+  color: #56EE4F;
+  text-align: center;
+  font-family: verdana;
+  font-weight: bold;
+  font-size: 2.5em;
+}
 #otherPages p{
   display: block;
   border-top: .2em solid #00C0A6 ;
@@ -68,6 +75,42 @@ a, a:hover, a:visited{
   margin: 0 5em 0 5em;
   text-align: center;
 }
+#NHDSquad{
+  border-top: .2em solid #00C0A6 ;
+  width:100%;
+}
+#NHDSquad td img{
+  width: 15em;
+  height: 21em;
+  margin: 1em auto 0 auto;
+}
+#NHDSquad th{
+  width: 50%;
+  padding-left: 8em;
+  padding-right: 8em;
+  color: #8BFA87;
+  font-family: Palatino;
+  font-weight: bold;
+}
+#NHDSquad #aidenDesc{
+  padding: 1em 25em 3em 25em;
+  font-size: 1.2em;
+}
+#NHDSquad .name{
+  color: #56EE4F;
+  padding-top: 1em;
+  font-size: 2em;
+}
+#NHDSquad .title{
+  padding-top: .2em;
+  font-size: 1.5em;
+}
+#NHDSquad .description{
+  padding-top: 1em;
+  padding-bottom: 3em;
+  font-size: 1.2em;
+}
+
 #header{
   background-image: url(topBar.jpg);
   background-repeat: no-repeat;
