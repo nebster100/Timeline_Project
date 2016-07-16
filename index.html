@@ -155,10 +155,11 @@
         if(numberOfTimelines == 1){
           var earliestYear = one[0].startYear;
           var latestYear = one[one.length - 1].endYear;
-          var ratio = one.length / (latestYear - earliestYear) * 26;
+          var ratio = one.length / (latestYear - earliestYear) * 8;
           var oneI = 0;
           var datePadding = 0;
 
+          document.getElementById("submit").innerHTML = earliestYear + '    ' + latestYear; 
           var year;
           for(year = earliestYear; year < latestYear; year++)
             if(oneI < one.length && one[oneI].startYear == year){
@@ -189,6 +190,7 @@
 
           var ratio = (one.length + two.length) / (latestYear - earliestYear) * 13;
 
+          document.getElementById("submit").innerHTML = earliestYear + '    ' + latestYear; 
           var year;
           for(year = earliestYear; year < latestYear; year++){
             if(oneI < one.length && one[oneI].startYear == year){
