@@ -167,11 +167,11 @@
             if(oneI < one.length && one[oneI].startYear == year){
               out[0] += makeEvent(one[oneI], datePadding * ratio);
               year--;
-              oneI++;
               if(oneI === 0)
                datePadding = 0;
               else
                 datePadding = datePaddingSub;
+              oneI++;
               datePaddingSub = 0;
             }
             else{
@@ -206,24 +206,24 @@
             if(oneI < one.length && one[oneI].startYear == year){
               out[0] += makeEvent(one[oneI], datePadding[0] * ratio);
               year--;
-              oneI++;
               if(oneI === 0)
                datePadding[0] = 0;
               else
                 datePadding[0] = datePaddingSub[0];
               datePaddingSub[0] = 0;
+              oneI++;
               if(twoI < two.length && !(two[twoI].startYear == year))
                 datePadding[1] += 27/2 / ratio;
             }
             else if(twoI < two.length && two[twoI].startYear == year){
               out[1] += makeEvent(two[twoI], datePadding[1] * ratio);
               year--;
-              twoI++;
               if(twoI === 0)
                datePadding[1] = 0;
               else
                 datePadding[1] = datePaddingSub[1];
               datePaddingSub[1] = 0;
+              twoI++;
               if(oneI < one.length && !(one[oneI].startYear == year))
                 datePadding[0] += 27/2 / ratio;
             }
@@ -274,12 +274,12 @@
             if(oneI < one.length && one[oneI].startYear == year){
               out[0] += makeEvent(one[oneI], datePadding[0] * ratio);
               year--;
-              oneI++;
               if(oneI === 0)
                datePadding[0] = 0;
               else
                 datePadding[0] = datePaddingSub[0];
               datePaddingSub[0] = 0;
+              oneI++;
               if(twoI < two.length && !(two[twoI].startYear == year))
                 datePadding[1] += 27/2 / ratio;
               if(threeI < three.length && !(three[threeI].startYear == year))
@@ -289,12 +289,12 @@
            else if(twoI < two.length && two[twoI].startYear == year){
               out[1] += makeEvent(two[twoI], datePadding[1] * ratio);
               year--;
-              twoI++;
               if(twoI === 0)
                datePadding[1] = 0;
               else
                 datePadding[1] = datePaddingSub[1];
               datePaddingSub[1] = 0;
+              twoI++;
               if(oneI < one.length && !(one[oneI].startYear == year))
                 datePadding[0] += 27/2 / ratio;
               if(threeI < three.length && !(three[threeI].startYear == year))
@@ -304,12 +304,12 @@
             else if(threeI < three.length && three[threeI].startYear == year){
               out[2] += makeEvent(three[threeI], datePadding[2] * ratio);
               year--;
-              threeI++;
               if(threeI === 0)
                datePadding[2] = 0;
               else
                 datePadding[2] = datePaddingSub[2];
               datePaddingSub[2] = 0;
+              threeI++;
               if(oneI < one.length && !(one[oneI].startYear == year))
                 datePadding[0] += 27/2 / ratio;
               if(twoI < two.length && !(two[twoI].startYear == year))
