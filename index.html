@@ -155,6 +155,8 @@
         if(numberOfTimelines == 1){
           var earliestYear = one[0].startYear;
           var latestYear = one[one.length - 1].endYear;
+          if(latestYear === null)
+            latestYear = 2016;
           var ratio = one.length / (latestYear - earliestYear) * 8;
           var oneI = 0;
           var datePadding = 0;
@@ -183,12 +185,14 @@
             earliestYear = two[0].startYear;
 
           var latestYear;
-          if(one[one.length-1].endYear >= two[two.length-1].endYear)
+          if(one[one.length-1].endYear === null || two[two.length-1].endYear === null)
+            latestYear = 2016;
+          else if(one[one.length-1].endYear >= two[two.length-1].endYear)
             latestYear = one[one.length-1].endYear;
           else
             latestYear = two[two.length-1].endYear;
 
-          var ratio = (one.length + two.length) / (latestYear - earliestYear) * 13;
+          var ratio = (one.length + two.length) / (latestYear - earliestYear) * 4;
 
           document.getElementById("submit").innerHTML = earliestYear + '    ' + latestYear; 
           var year;
@@ -233,7 +237,10 @@
             earliestYear = three[0].startYear;
 
           var latestYear;
-          if(one[one.length-1].endYear >= two[two.length-1].endYear)
+          
+          if(one[one.length-1].endYear === null || two[two.length-1].endYear === null|| three[three.length-1].endYear === null)
+            latestYear = 2016;
+          else if(one[one.length-1].endYear >= two[two.length-1].endYear)
             if(one[one.length-1].endYear >= three[three.length-1].endYear)
               latestYear = one[one.length-1].endYear;
             else
@@ -243,7 +250,7 @@
           else
             latestYear = three[three.length-1].endYear;
 
-          var ratio = (one.length + two.length + three.length) / (latestYear - earliestYear) * 26 / 3;
+          var ratio = (one.length + two.length + three.length) / (latestYear - earliestYear) * 8 / 3;
 
           var year;
 
