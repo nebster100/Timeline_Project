@@ -160,6 +160,7 @@
           var ratio = one.length / (latestYear - earliestYear) * 8;
           var oneI = 0;
           var datePadding = 0;
+          var datePaddingSub = 0;
 
           var year;
           for(year = earliestYear; year < latestYear; year++)
@@ -167,10 +168,16 @@
               out[0] += makeEvent(one[oneI], datePadding * ratio);
               year--;
               oneI++;
-              datePadding = 0;
+              if(oneI === 0)
+               datePadding = 0;
+              else
+                datePadding = datePaddingSub;
+              datePaddingSub = 0;
             }
-            else
+            else{
+              datePaddingSub++;
               datePadding++;
+            }
         }
         else if(numberOfTimelines == 2){
           var oneI = 0;
@@ -200,16 +207,16 @@
               year--;
               oneI++;
               datePadding[0] = 0;
-         /*     if(twoI < two.length && !(two[twoI].startYear == year))
-                datePadding[1] += 27/2 / ratio;*/
+              if(twoI < two.length && !(two[twoI].startYear == year))
+                datePadding[1] += 27/2 / ratio;
             }
             else if(twoI < two.length && two[twoI].startYear == year){
               out[1] += makeEvent(two[twoI], datePadding[1] * ratio);
               year--;
               twoI++;
               datePadding[1] = 0;
-             /* if(oneI < one.length && !(one[oneI].startYear == year))
-                datePadding[0] += 27/2 / ratio;*/
+              if(oneI < one.length && !(one[oneI].startYear == year))
+                datePadding[0] += 27/2 / ratio;
             }
             else{
               datePadding[0]++;
