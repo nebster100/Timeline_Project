@@ -14,7 +14,7 @@ app.get('/timeline', function (req,res){
 		var uniqueTLObjects = [];
 		tlObjects.forEach(function (tlObject) {
 			if(isUnique(tlObject, uniqueTLObjects)){
-				uniqueTLObjects.push(tlObject);
+				uniqueTLObjects.push(tlObject.timelineName);
 			}
 		});
 		res.status(200).json(uniqueTLObjects);
@@ -26,7 +26,7 @@ app.get('/timeline', function (req,res){
 function isUnique(tlObj, tlArr){
 	var unique = true;
 	tlArr.forEach(function (tlTest){
-		if(tlTest.timelineName === tlObj.timelineName){
+		if(tlTest === tlObj.timelineName){
 			unique =  false;
 		}
 	});

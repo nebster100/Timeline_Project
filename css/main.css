@@ -74,14 +74,16 @@ a, a:hover, a:visited{
   font-weight: bold;
   font-size: 1.5em;
 }
+#otherPages p:nth-of-type(1){
+   border-top: .2em solid #00C0A6 ; 
+}
 #otherPages p{
   display: block;
-  border-top: .2em solid #00C0A6 ;
   color: #8BFA87;
   padding-top: 3em;
   font-family: Palatino;
   font-size: 1.5em;
-  margin: 0 5em 0 5em;
+  margin: 0 10em 0 10em;
   text-align: center;
 }
 #otherPages .contactUs{
@@ -105,7 +107,7 @@ a, a:hover, a:visited{
   width:100%;
 }
 #NHDSquad td img{
-  width: 15em;
+  width: 21em;
   height: 21em;
   margin: 1em auto 0 auto;
 }
@@ -188,14 +190,21 @@ a, a:hover, a:visited{
 .overlay{
   background: rgba(255,255,255,.5);
 }
-
+.datepadding{
+  position: relative;
+  width: 50%;
+  border-radius: 5px;
+  display: block;
+  background-color: rgba(255,0,0,.8);
+  overflow: hidden;
+}
 .event{
   position: relative;
   text-align: left;
   float: left;
   clear: left;
   width: 47%;
-  margin-top: 8em;
+  margin-top: 1em;
   border-radius: 5px;
   display: block;
   background-color: rgba(0,0,0,.3);
@@ -220,15 +229,12 @@ a, a:hover, a:visited{
   background-color: rgba(0, 0, 0, 0);
   text-align: right;
 }
-.event:nth-of-type(2n) {
+.event:nth-of-type(4n+1) {
   float: right;
   clear: right;
 }
-.event:nth-of-type(2n) h1{
+.event:nth-of-type(4n) h1{
   text-align: left;
-}
-.offset-first{
-    margin-top: 2em;
 }
 .event .name{
   background-color: rgba(0, 0, 0, 0);

@@ -65,7 +65,7 @@
       var out = '';
       
       for(i = 0; i < arr.length; i++) {
-            out += ' <option value = "' + arr[i].timelineName + '">' + arr[i].timelineName + '</option>';
+            out += ' <option value = "' + arr[i] + '">' + arr[i] + '</option>';
         }
         document.getElementById("dropdownOne").innerHTML = out;
         var revisedOut = '<option value="None">None</option>' + out;
@@ -77,85 +77,261 @@
 
     <script>
       function changePage(){
+
         var numberOfTimelines = 1;
         var one = document.getElementById("dropdownOne");
         one = one.options[one.selectedIndex].value;
 
         var two = document.getElementById("dropdownTwo");
         two = two.options[two.selectedIndex].value;
-        if(two != "None" && two != one)
-          numberOfTimelines++;
 
         var three = document.getElementById("dropdownThree");
         three = three.options[three.selectedIndex].value;
-        if(three != "None" && three != two && three != one)
-          numberOfTimelines++;
 
-        var format;
-        if(numberOfTimelines == 1)
-          format = "whole";
-        else if(numberOfTimelines == 2)
-          format = "half";
-        else if(numberOfTimelines == 3)
-          format = "third";
 
-        var color = getColor();
-        var largestHeight = requestTimeline(one, format, true, color, 0);
-
+        var arrOne = requestTimeline(one);
+        var timelineArray = {};
+        timelineArray.one = arrOne;
 
         if(two != "None" && two != one){
-          var newColor = getColor();
-          while(color == newColor)
-             newColor = getColor();
-          color = newColor;
-          var otherHeight = requestTimeline(two, format, false, color, largestHeight);
-          if(otherHeight > largestHeight)
-            largestHeight = otherHeight;
+          var arrTwo = requestTimeline(two);
+          timelineArray.two = arrTwo;
+          numberOfTimelines++;
         }
         if(three != "None" && three != two && three != one){
-          var newColor = getColor();
-          while(color == newColor)
-             newColor = getColor();
-          color = newColor;
-          requestTimeline(three, format, false, color, largestHeight);
+          var arrThree = requestTimeline(three);
+          timelineArray.three = arrThree;
+          numberOfTimelines++;
         }
-      }
 
-      function requestTimeline(ext, format, reset, color, dHeight){
+        makeTimelines(timelineArray, numberOfTimelines);
+
+
+      }
+      function requestTimeline(ext){
         var url = "timeline/" + ext;
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url, false);
         xhr.send(null); 
-        var height = 10;
+        var myArr;
         if (xhr.status == 200) {
-            var myArr = JSON.parse(xhr.responseText);
-            dHeight = makeTimeline(myArr, format, reset, color, dHeight);
+            myArr = JSON.parse(xhr.responseText);
         }
-        return dHeight;
+        return myArr;
+
       }
 
-      function makeTimeline(arr, format, reset, color, dHeight) {
-        var out = '<div class = "overlay' + format + ' color' + color + '"><div class = "' + format + '">';
+      function makeTimelines(timelineData, numberOfTimelines) {
 
-        arr = makeDates(arr);
-        out += '<div class= "event offset-first"> <h1> ' + arr[0].startDate + ' - ' + arr[0].endDate + '</h1><h1 class = "name"> ' + arr[0].nameTitle + '</h1><img src = "' + arr[0].img + '""></img><div class = "Text">' + arr[0].description + '</div>  <a target= "_blank" href = "' + arr[0].link + '">More Info </a> </div>' ;  
+        var out = [];
+        out.length = numberOfTimelines;
+        var format;
+        var one = makeDates(timelineData.one);
+        var two, three;
+        if(numberOfTimelines == 1)
+          format = "whole";
+        else if(numberOfTimelines == 2){
+          format = "half";
+          two = makeDates(timelineData.two);
+        }
+        else if(numberOfTimelines == 3){
+          format = "third";
+          two = makeDates(timelineData.two);
+          three = makeDates(timelineData.three);
+        }
 
-         var i;
-         for(i = 1; i < arr.length; i++) {
-            out += ' <div class= "event"> <h1> ' + arr[i].startDate + ' - ' + arr[i].endDate + '</h1><h1 class = "name"> ' + arr[i].nameTitle + '</h1><img src = "' + arr[i].img + '""></img><div class = "Text">' + arr[i].description + '</div>  <a target= "_blank" href = "' + arr[i].link + '">More Info </a> </div>';
+        var i;
+        var colors = [];
+        colors.length = numberOfTimelines;
+        for(i = 0; i < out.length; i++){
+          var color = getColor();
+          while((i > 0 && colors[0] == color) || (i>1 && colors[1] === color)){
+            color = getColor();
           }
-          out += '</div></div>';
-          if(reset)
-            document.getElementById("timeline").innerHTML = out;
-          else{
-            document.getElementById("timeline").innerHTML += out;
-            if(dHeight < document.getElementsByClassName('color' + color)[0].offsetHeight)
-              dHeight = document.getElementsByClassName('color' + color)[0].offsetHeight;
-            var overlays = document.getElementsByClassName('overlay' + format);
-            for(i = 0; i < overlays.length; i++)
+          colors[i] = color;
+          out[i] = '<div class = "overlay' + format + ' color' + color + '"><div class = "' + format + '"> <div class = "datepadding" style = "height:2em"></div>';
+        }
+
+        if(numberOfTimelines == 1){
+          var earliestYear = one[0].startYear;
+          var latestYear = one[one.length - 1].endYear;
+          var ratio = one.length / (latestYear - earliestYear) * 26;
+          var oneI = 0;
+          var datePadding = 0;
+
+          var year;
+          for(year = earliestYear; year < latestYear; year++)
+            if(oneI < one.length && one[oneI].startYear == year){
+              out[0] += makeEvent(one[oneI], datePadding * ratio);
+              year--;
+              oneI++;
+              datePadding = 0;
+            }
+            else
+              datePadding++;
+        }
+        else if(numberOfTimelines == 2){
+          var oneI = 0;
+          var twoI = 0;
+          var datePadding = [0, 0];
+
+          var earliestYear;
+          if(one[0].startYear <= two[0].startYear)
+            earliestYear = one[0].startYear;
+          else
+            earliestYear = two[0].startYear;
+
+          var latestYear;
+          if(one[one.length-1].endYear >= two[two.length-1].endYear)
+            latestYear = one[one.length-1].endYear;
+          else
+            latestYear = two[two.length-1].endYear;
+
+          var ratio = (one.length + two.length) / (latestYear - earliestYear) * 13;
+
+          var year;
+          for(year = earliestYear; year < latestYear; year++){
+            if(oneI < one.length && one[oneI].startYear == year){
+              out[0] += makeEvent(one[oneI], datePadding[0] * ratio);
+              year--;
+              oneI++;
+              datePadding[0] = 0;
+              if(twoI < two.length && !(two[twoI].startYear == year))
+                datePadding[1] += 27/2 / ratio;
+            }
+            else if(twoI < two.length && two[twoI].startYear == year){
+              out[1] += makeEvent(two[twoI], datePadding[1] * ratio);
+              year--;
+              twoI++;
+              datePadding[1] = 0;
+              if(oneI < one.length && !(one[oneI].startYear == year))
+                datePadding[0] += 27/2 / ratio;
+            }
+            else{
+              datePadding[0]++;
+              datePadding[1]++;
+            }
+            document.getElementById("submit").innerHTML = oneI + ' +++ ' + twoI;
+        }
+      }
+      else if(numberOfTimelines == 3){
+          var oneI = 0;
+          var twoI = 0;
+          var threeI = 0;
+          var datePadding = [0, 0, 0];
+
+          var earliestYear;
+          if(one[0].startYear <= two[0].startYear)
+            if(one[0].startYear <= three[0].startYear)
+               earliestYear = one[0].startYear;
+            else
+               earliestYear = three[0].startYear;
+          else if(two[0].startYear <= three[0].startYear)
+            earliestYear = two[0].startYear;
+          else
+            earliestYear = three[0].startYear;
+
+          var latestYear;
+          if(one[one.length-1].endYear >= two[two.length-1].endYear)
+            if(one[one.length-1].endYear >= three[three.length-1].endYear)
+              latestYear = one[one.length-1].endYear;
+            else
+              latestYear = three[three.length-1].endYear;
+          else if(two[two.length-1].endYear >= three[three.length-1].endYear)
+            latestYear = two[two.length-1].endYear;
+          else
+            latestYear = three[three.length-1].endYear;
+
+          var ratio = (one.length + two.length + three.length) / (latestYear - earliestYear) * 26 / 3;
+
+          var year;
+
+          for(year = earliestYear; year < latestYear; year++){
+            if(oneI < one.length && one[oneI].startYear == year){
+              out[0] += makeEvent(one[oneI], datePadding[0] * ratio);
+              year--;
+              oneI++;
+              datePadding[0] = 0;
+              if(twoI < two.length && !(two[twoI].startYear == year))
+                datePadding[1] += 27/2 / ratio;
+              if(threeI < three.length && !(three[threeI].startYear == year))
+                datePadding[2] += 27/2 / ratio;
+            }
+
+           else if(twoI < two.length && two[twoI].startYear == year){
+              out[1] += makeEvent(two[twoI], datePadding[1] * ratio);
+              year--;
+              twoI++;
+              datePadding[1] = 0;
+              if(oneI < one.length && !(one[oneI].startYear == year))
+                datePadding[0] += 27/2 / ratio;
+              if(threeI < three.length && !(three[threeI].startYear == year))
+                datePadding[2] += 27/2 / ratio;
+            }
+
+            else if(threeI < three.length && three[threeI].startYear == year){
+              out[2] += makeEvent(three[threeI], datePadding[2] * ratio);
+              year--;
+              threeI++;
+              datePadding[2] = 0;
+              if(oneI < one.length && !(one[oneI].startYear == year))
+                datePadding[0] += 27/2 / ratio;
+              if(twoI < two.length && !(two[twoI].startYear == year))
+                datePadding[1] += 27/2 / ratio;
+            }
+
+            else{
+              datePadding[0]++;
+              datePadding[1]++;
+              datePadding[2]++;
+            }
+        }
+      }
+
+
+        for(i = 0; i < out.length; i++){
+          out[i] += '</div></div>';
+          if(i == 0)
+              document.getElementById("timeline").innerHTML = out[i];
+          else
+              document.getElementById("timeline").innerHTML += out[i];
+        }
+        
+        /*if(dHeight < document.getElementsByClassName('color' + color)[0].offsetHeight){
+          dHeight = document.getElementsByClassName('color' + color)[0].offsetHeight;
+          var overlays = document.getElementsByClassName('overlay' + format);
+          for(i = 0; i < overlays.length; i++)
               overlays[i].style.height = dHeight + "px";
-          }
-          return document.getElementsByClassName('color' + color)[0].offsetHeight;;
+          }  */        
+      }
+
+      function paddingCalcTwo(num, otherNum){
+        if(num >= otherNum)
+          return 0;
+        var difference = otherNum - num;
+        if(difference % 2 == 0 && num != 0)
+          return evenCalc(difference) + 6;
+        else if(difference % 2 == 0)
+          return evenCalc(difference);
+        else if(difference % 2 == 1 && difference == 0)
+          return oddCalc(difference) + 6;
+        return oddCalc(difference);
+      }
+      function evenCalc(diff){
+        return diff/2 * 34;
+      }
+      function oddCalc(diff){
+        if(diff > 1)
+          return 34 + oddCalc(diff - 2);
+        return 28;
+      }
+
+      function makeEvent(tlObject, datePadding){
+
+        var myEvent;
+        myEvent = '<div class = "datepadding" style = "height: ' + datePadding + 'em"></div><div class= "event"> <h1> ' + tlObject.startDate + ' - ' + tlObject.endDate + '</h1><h1 class = "name"> ' + tlObject.nameTitle + '</h1><img src = "' + tlObject.img + '""></img><div class = "Text">' + tlObject.description + '</div>  <a target= "_blank" href = "' + tlObject.link + '">More Info </a> </div>';
+        return myEvent;
+
       }
 
       function makeDates(arr){
@@ -168,8 +344,9 @@
               date += arr[i].startDay + ' ';
           }
           if(arr[i].startYear < 0)
-            arr[i].startYear = -1 * arr[i].startYear + ' BC';
-          date += arr[i].startYear;
+            date += (-1 * arr[i].startYear) + ' BC';
+          else
+            date += arr[i].startYear;
           arr[i].startDate = date;
 
           date = '';
@@ -180,9 +357,8 @@
               date += arr[i].endDay + ' ';
           }
           if(arr[i].endYear < 0)
-            arr[i].endYear = -1 * arr[i].endYear + ' BC';
-
-          if(typeof arr[i].endYear != 'string' && date == '')
+            date += (-1 * arr[i].endYear) + ' BC';
+          else if(typeof arr[i].endYear != 'string' && date == '')
             date = 'Present';
           else
             date += arr[i].endYear;
@@ -237,7 +413,6 @@
           color = "purple";
         return color;
       }
-
       function resetPage(){
           document.getElementById("timeline").innerHTML = '<div class = "overlay"><div id = "homePage"><h1>Welcome to Fourth Axis!</h1><p> This web application was designed to help users visualize history in a new way. Select up to three historical timelines above and explore!</p></div></div>';
       }
