@@ -161,7 +161,6 @@
           var oneI = 0;
           var datePadding = 0;
 
-          document.getElementById("submit").innerHTML = earliestYear + '    ' + latestYear; 
           var year;
           for(year = earliestYear; year < latestYear; year++)
             if(oneI < one.length && one[oneI].startYear == year){
@@ -194,7 +193,6 @@
 
           var ratio = (one.length + two.length) / (latestYear - earliestYear) * 4;
 
-          document.getElementById("submit").innerHTML = earliestYear + '    ' + latestYear; 
           var year;
           for(year = earliestYear; year < latestYear; year++){
             if(oneI < one.length && one[oneI].startYear == year){
@@ -311,27 +309,6 @@
           for(i = 0; i < overlays.length; i++)
               overlays[i].style.height = dHeight + "px";
           }  */        
-      }
-
-      function paddingCalcTwo(num, otherNum){
-        if(num >= otherNum)
-          return 0;
-        var difference = otherNum - num;
-        if(difference % 2 == 0 && num != 0)
-          return evenCalc(difference) + 6;
-        else if(difference % 2 == 0)
-          return evenCalc(difference);
-        else if(difference % 2 == 1 && difference == 0)
-          return oddCalc(difference) + 6;
-        return oddCalc(difference);
-      }
-      function evenCalc(diff){
-        return diff/2 * 34;
-      }
-      function oddCalc(diff){
-        if(diff > 1)
-          return 34 + oddCalc(diff - 2);
-        return 28;
       }
 
       function makeEvent(tlObject, datePadding){
