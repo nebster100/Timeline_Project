@@ -200,16 +200,16 @@
               year--;
               oneI++;
               datePadding[0] = 0;
-              if(twoI < two.length && !(two[twoI].startYear == year))
-                datePadding[1] += 27/2 / ratio;
+         /*     if(twoI < two.length && !(two[twoI].startYear == year))
+                datePadding[1] += 27/2 / ratio;*/
             }
             else if(twoI < two.length && two[twoI].startYear == year){
               out[1] += makeEvent(two[twoI], datePadding[1] * ratio);
               year--;
               twoI++;
               datePadding[1] = 0;
-              if(oneI < one.length && !(one[oneI].startYear == year))
-                datePadding[0] += 27/2 / ratio;
+             /* if(oneI < one.length && !(one[oneI].startYear == year))
+                datePadding[0] += 27/2 / ratio;*/
             }
             else{
               datePadding[0]++;
