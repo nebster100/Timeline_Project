@@ -171,6 +171,7 @@
               datePadding++;
             }
         }
+
         else if(numberOfTimelines == 2){
           var oneI = 0;
           var twoI = 0;
@@ -197,10 +198,13 @@
             if(oneI < one.length && one[oneI].startYear == year){
               out[0] += makeEvent(one[oneI], datePadding[0] * ratio);
               year--;
-              datePadding[0] = 0;
               oneI++;
-              if(twoI < two.length && !(two[twoI].startYear == year))
+              if(twoI < two.length && !(two[twoI].startYear == year)){
                 datePadding[1] += 27/2 / ratio;
+                if(oneI % 2 != twoI % 2)
+                  datePadding[1] -= datePadding[0];
+              }
+              datePadding[0] = 0;
             }
             else if(twoI < two.length && two[twoI].startYear == year){
               out[1] += makeEvent(two[twoI], datePadding[1] * ratio);
@@ -209,6 +213,8 @@
               twoI++;
               if(oneI < one.length && !(one[oneI].startYear == year))
                 datePadding[0] += 27/2 / ratio;
+                if(twoI % 2 != oneI % 2)
+                  datePadding[0] -= datePadding[1];
             }
             else{
               datePadding[0]++;
