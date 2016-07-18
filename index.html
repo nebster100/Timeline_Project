@@ -200,7 +200,7 @@
               year--;
               oneI++;
               if(twoI < two.length && !(two[twoI].startYear == year)){
-                if(oneI % 2 != twoI % 2)
+                if(oneI % 2 != twoI % 2 && datePadding[1] > datePadding[0])
                   datePadding[1] -= datePadding[0];
                 else
                   datePadding[1] += 27 / ratio;
@@ -212,7 +212,7 @@
               year--;
               twoI++;
               if(oneI < one.length && !(one[oneI].startYear == year)){
-                if(twoI % 2 != oneI % 2 )
+                if(twoI % 2 != oneI % 2 && datePadding[0] > datePadding[1])
                   datePadding[0] -= datePadding[1];
                 else
                   datePadding[0] += 27 / ratio;
