@@ -197,11 +197,6 @@ a, a:hover, a:visited{
   display: block;
   background-color: rgba(0,0,0,.5);
   overflow: hidden;
-  float: left;
-  clear: left;
-}
-.datepadding:nth-of-type(4n){
-    float: right;
 }
 .event{
   position: relative;

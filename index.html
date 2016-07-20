@@ -175,7 +175,8 @@
         else if(numberOfTimelines == 2){
           var oneI = 0;
           var twoI = 0;
-          var datePadding;
+          var datePadding, bonusPadding = 0;
+          var currentTLine = 0;
 
           var earliestYear;
           if(one[0].startYear <= two[0].startYear)
@@ -194,9 +195,46 @@
           var ratio = (one.length + two.length) / (latestYear - earliestYear) * 8;
 
           var year;
+
           for(year = earliestYear; year < latestYear; year++){
             if(oneI < one.length && one[oneI].startYear == year){
-              var index = twoI - 1;
+              if(oneI == 0)
+                datePadding = one[oneI].startYear - earliestYear;
+              else
+                datePadding = one[oneI].startYear - one[oneI - 1].startYear;
+
+              if(currentTLine % 2 != 1){
+                currentTLine = 1;
+                datePadding += bonusPadding;
+                bonusPadding = 0;
+              }
+              else{
+                if((currentTLine - 1)/2 % 2 == 0)
+                  bonusPadding += 27 / ratio;
+                currentTLine += 2
+              }
+              out[0] += makeEvent(one[oneI], datePadding * ratio);
+              oneI++;
+            }
+            if(twoI < two.length && two[twoI].startYear == year){
+              if(twoI == 0)
+                datePadding = two[twoI].startYear - earliestYear;
+              else
+                datePadding = two[twoI].startYear - two[twoI - 1].startYear;
+              
+              if(currentTLine % 2 != 0){
+                datePadding += bonusPadding;
+                currentTLine = 2;
+                bonusPadding = 0;
+              }
+              else{
+                if((currentTLine)/2 % 2 == 1)
+                  bonusPadding += 27 / ratio;
+                currentTLine += 2
+              }
+              out[1] += makeEvent(two[twoI], datePadding * ratio);
+              twoI++;
+            }/*
               if(oneI == 0 && twoI > 1){
                 datePadding = one[oneI].startYear - two[0].startYear;
                 datePadding += ((twoI - twoI % 2) / 2)  * 27 / ratio;
@@ -252,7 +290,7 @@
               }
               out[1] += makeEvent(two[twoI], datePadding * ratio);
               twoI++;
-           }
+           }*/
           if(oneI < one.length && one[oneI].startYear == year || twoI < two.length && two[twoI].startYear == year)
             year--;
         }
