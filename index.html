@@ -214,6 +214,8 @@
                   datePadding = one[oneI].startYear - one[oneI-1].startYear;
                   datePadding += ((twoI - index - (twoI - index) % 2) / 2)  * 27 / ratio;
                 }
+                else if(twoI == two.length)
+                  datePadding = one[oneI].startYear - one[oneI-1].startYear;
                 else{
                   datePadding = one[oneI.startYear] - two[index].startYear;
                   datePadding += ((twoI - index - (twoI - index) % 2) / 2)  * 27 / ratio;
@@ -231,6 +233,8 @@
               }
               else if(twoI == 0 && oneI == 0)
                 datePadding = 0;
+              else if(oneI == one.length)
+                datePadding = two[twoI].startYear - two[twoI-1].startYear;
               else{
                 while(index >= 0 && two[twoI - 1].startYear < one[index].startYear)
                   index--;
