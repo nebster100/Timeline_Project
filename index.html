@@ -211,6 +211,8 @@
               else{
                 if((currentTLine - 1)/2 % 2 == 0)
                   bonusPadding += 27 / ratio;
+               else
+                  bonusPadding -= datePadding;
                 currentTLine += 2
               }
               out[0] += makeEvent(one[oneI], datePadding * ratio);
@@ -230,6 +232,8 @@
               else{
                 if((currentTLine)/2 % 2 == 1)
                   bonusPadding += 27 / ratio;
+                else
+                  bonusPadding -= datePadding;
                 currentTLine += 2
               }
               out[1] += makeEvent(two[twoI], datePadding * ratio);
