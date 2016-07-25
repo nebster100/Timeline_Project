@@ -256,10 +256,6 @@
               out[1] += makeEvent(two[twoI], datePadding * ratio);
               twoI++;
           }
-          if(year == 1307){
-            year = 2016;
-            document.getElementById("submit").innerHTML = datePadding + ' ' + currentTLine + ' ' + bonusPadding;
-          }
           if(oneI < one.length && one[oneI].startYear == year || twoI < two.length && two[twoI].startYear == year)
             year--;
         }
