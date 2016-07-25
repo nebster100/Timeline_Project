@@ -200,10 +200,10 @@
             if(oneI < one.length && one[oneI].startYear == year){
               if(oneI == 0)
                 datePadding = one[oneI].startYear - earliestYear;
-              else //if(oneI % 2 == 1)
+              else if(oneI % 2 == 1)
                 datePadding = one[oneI].startYear - one[oneI - 1].startYear;
-              /*else
-                datePadding = one[oneI].startYear - one[oneI - 2].startYear;*/
+              else
+                datePadding = one[oneI].startYear - one[oneI - 2].startYear;
 
               if(currentTLine % 2 != 1){
                 if(bonusPadding > 0)
@@ -220,10 +220,6 @@
               else{
                 if((currentTLine - 1)/2 % 2 == 0)
                   bonusPadding += 27 / ratio;
-                else{
-                  if(datePadding > 27/ratio)
-                    bonusPadding -= 27/ratio;
-                }
                 currentTLine += 2;
               }
               out[0] += makeEvent(one[oneI], datePadding * ratio);
@@ -232,10 +228,10 @@
             if(twoI < two.length && two[twoI].startYear == year){
               if(twoI == 0)
                 datePadding = two[twoI].startYear - earliestYear;
-              else //if(twoI % 2 == 1)
+              else if(twoI % 2 == 1)
                 datePadding = two[twoI].startYear - two[twoI - 1].startYear;
-           /*   else
-                datePadding = two[twoI].startYear - two[twoI - 2].startYear;*/
+              else
+                datePadding = two[twoI].startYear - two[twoI - 2].startYear;
               if(currentTLine == 0){
                 currentTLine = 2;
                 bonusPadding = 27/ratio;
@@ -259,6 +255,10 @@
               }
               out[1] += makeEvent(two[twoI], datePadding * ratio);
               twoI++;
+          }
+          if(year == 1307){
+            year = 2016;
+            document.getElementById("submit").innerHTML = datePadding + ' ' + currentTLine + ' ' + bonusPadding;
           }
           if(oneI < one.length && one[oneI].startYear == year || twoI < two.length && two[twoI].startYear == year)
             year--;
