@@ -206,7 +206,7 @@
                 datePadding = one[oneI].startYear - one[oneI - 2].startYear;
 
               if(currentTLine % 2 != 1){
-                datePadding += bonusPadding;
+                datePadding += bonusPadding - 27/ratio;
                 if(oneI % 2 == 1){
                   currentTLine = 3;
                   bonusPadding = 0;
@@ -240,7 +240,7 @@
                 bonusPadding = 27/ratio;
               }
               if(currentTLine % 2 != 0){
-                datePadding += bonusPadding;
+                datePadding += bonusPadding - 27/ratio;
                 if(twoI % 2 == 1){
                   currentTLine = 4;
                   bonusPadding = 0;
