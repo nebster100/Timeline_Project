@@ -15,10 +15,6 @@
 .third h1{
   font-size: 16pt;
 }
-.dividerthird:nth-child(2){
-  right: 0;
-  left: 33%;
-}
 .third .event {
   width: 45%;
   padding: 2%;

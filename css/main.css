@@ -197,6 +197,12 @@ a, a:hover, a:visited{
   display: block;
   background-color: rgba(0,0,0,.5);
   overflow: hidden;
+  float: left;
+  clear: left;
+}
+.datepadding:nth-of-type(4n){
+    clear: right;
+    float: right;
 }
 .event{
   position: relative;
@@ -233,7 +239,7 @@ a, a:hover, a:visited{
   float: right;
   clear: right;
 }
-.event:nth-of-type(4n) h1{
+.event:nth-of-type(4n+1) h1{
   text-align: left;
 }
 .event .name{

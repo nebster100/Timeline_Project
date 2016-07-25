@@ -206,14 +206,18 @@
               if(currentTLine % 2 != 1){
                 currentTLine = 1;
                 datePadding += bonusPadding;
-                bonusPadding = 0;
+                bonusPadding = 27 / ratio;
               }
               else{
                 if((currentTLine - 1)/2 % 2 == 0)
                   bonusPadding += 27 / ratio;
-               else
-                  bonusPadding -= datePadding;
-                currentTLine += 2
+               else{
+                  if(datePadding > 27/ratio)
+                    bonusPadding -= 27/ratio;
+                  else
+                    bonusPadding -= datePadding;
+                }
+                currentTLine += 2;
               }
               out[0] += makeEvent(one[oneI], datePadding * ratio);
               oneI++;
@@ -227,74 +231,18 @@
               if(currentTLine % 2 != 0){
                 datePadding += bonusPadding;
                 currentTLine = 2;
-                bonusPadding = 0;
+                bonusPadding = 27 / ratio;
               }
               else{
                 if((currentTLine)/2 % 2 == 1)
                   bonusPadding += 27 / ratio;
                 else
                   bonusPadding -= datePadding;
-                currentTLine += 2
+                currentTLine += 2;
               }
               out[1] += makeEvent(two[twoI], datePadding * ratio);
               twoI++;
-            }/*
-              if(oneI == 0 && twoI > 1){
-                datePadding = one[oneI].startYear - two[0].startYear;
-                datePadding += ((twoI - twoI % 2) / 2)  * 27 / ratio;
-              }
-              else if(oneI == 0 && twoI == 0)
-                datePadding = 0;
-              else{
-                while(index >= 0 && one[oneI - 1].startYear < two[index].startYear)
-                  index--;
-                index++;
-                if(index == twoI){
-                  datePadding = one[oneI].startYear - one[oneI-1].startYear;
-                }
-                else if(twoI > 0 && one[oneI - 1].startYear < two[twoI-1].startYear){ 
-                  datePadding = one[oneI].startYear - one[oneI-1].startYear;
-                  datePadding += ((twoI - index - (twoI - index) % 2) / 2)  * 27 / ratio;
-                }
-                else if(twoI == two.length)
-                  datePadding = one[oneI].startYear - one[oneI-1].startYear;
-                else{
-                  datePadding = one[oneI.startYear] - two[index].startYear;
-                  datePadding += ((twoI - index - (twoI - index) % 2) / 2)  * 27 / ratio;
-                }
-              }
-
-              out[0] += makeEvent(one[oneI], datePadding * ratio);
-              oneI++;
             }
-            else if(twoI < two.length && two[twoI].startYear == year){
-              var index = oneI - 1;
-              if(twoI == 0 && oneI > 1){
-                datePadding = two[twoI].startYear - one[0].startYear;
-                datePadding += (oneI + oneI % 2) / 2  * 27 / ratio;
-              }
-              else if(twoI == 0 && oneI == 0)
-                datePadding = 0;
-              else if(oneI == one.length)
-                datePadding = two[twoI].startYear - two[twoI-1].startYear;
-              else{
-                while(index >= 0 && two[twoI - 1].startYear < one[index].startYear)
-                  index--;
-                index++;
-                if(index == oneI)
-                  datePadding = two[twoI].startYear - two[twoI-1].startYear;
-                else if(oneI > 0 && two[twoI - 1].startYear < one[oneI-1].startYear){ 
-                  datePadding = two[twoI].startYear - twoI[twoI-1].startYear;
-                  datePadding += ((oneI - index - (oneI - index) % 2) / 2)  * 27 / ratio;
-                }
-                else{
-                  datePadding = two[twoI.startYear] - one[index].startYear;
-                  datePadding += ((oneI - index - (oneI - index) % 2) / 2)  * 27 / ratio;
-                }
-              }
-              out[1] += makeEvent(two[twoI], datePadding * ratio);
-              twoI++;
-           }*/
           if(oneI < one.length && one[oneI].startYear == year || twoI < two.length && two[twoI].startYear == year)
             year--;
         }
