@@ -198,9 +198,11 @@
 
           for(year = earliestYear; year < latestYear; year++){
             if(oneI < one.length && one[oneI].startYear == year){
-              if(oneI % 2 == 1)
+              if(oneI == 0)
+                datePadding = one[oneI].startYear - earliestYear;
+              else if(oneI % 2 == 1)
                 datePadding = one[oneI].startYear - one[oneI - 1].startYear;
-              else if(oneI > 0)
+              else
                 datePadding = one[oneI].startYear - one[oneI - 2].startYear;
 
               if(currentTLine % 2 != 1){
@@ -221,9 +223,11 @@
               oneI++;
             }
             if(twoI < two.length && two[twoI].startYear == year){
-              if(twoI % 2 == 1)
+              if(twoI == 0)
+                datePadding = two[twoI].startYear - earliestYear;
+              else if(twoI % 2 == 1)
                 datePadding = two[twoI].startYear - two[twoI - 1].startYear;
-              else if(twoI > 0)
+              else
                 datePadding = two[twoI].startYear - two[twoI - 2].startYear;
               
               if(currentTLine % 2 != 0){
