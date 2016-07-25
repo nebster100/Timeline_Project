@@ -198,9 +198,7 @@
 
           for(year = earliestYear; year < latestYear; year++){
             if(oneI < one.length && one[oneI].startYear == year){
-              if(oneI == 0)
-                datePadding = one[oneI].startYear - earliestYear;
-              else
+              if(oneI > 0)
                 datePadding = one[oneI].startYear - one[oneI - 1].startYear;
 
               if(currentTLine % 2 != 1){
@@ -210,10 +208,12 @@
               }
               else{
                 if((currentTLine - 1)/2 % 2 == 0)
-                  bonusPadding += 27 / ratio;
+                  bonusPadding += 27 / ratio + datePadding;
                else{
                   if(datePadding > 27/ratio)
                     bonusPadding -= 27/ratio;
+                  else
+                    bonusPadding -= datePadding;
                 }
                 currentTLine += 2;
               }
@@ -221,9 +221,7 @@
               oneI++;
             }
             if(twoI < two.length && two[twoI].startYear == year){
-              if(twoI == 0)
-                datePadding = two[twoI].startYear - earliestYear;
-              else
+              if(twoI > 0)
                 datePadding = two[twoI].startYear - two[twoI - 1].startYear;
               
               if(currentTLine % 2 != 0){
