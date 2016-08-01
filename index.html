@@ -169,7 +169,7 @@
                 datePadding += one[oneI].startYear - one[oneI - 1].startYear;
                 if(oneI >= 2){
                   var pSpace = datePadding - previousLoc[0];
-                  if(pSpace < 27/ratio)
+                  if(pSpace < (27/ratio))
                     datePadding = previousLoc[0] + 27/ratio; 
                 }
               }
@@ -213,7 +213,7 @@
                 datePadding += one[oneI].startYear - one[oneI - 1].startYear;
                 if(oneI >= 2 && oneI % 2 == 0){
                   var pSpace = datePadding - previousLoc[0][0];
-                  if(pSpace < 27/ratio)
+                  if(pSpace < (27/ratio))
                     datePadding = previousLoc[0][0] + 27/ratio;
                 }
               }
@@ -230,7 +230,7 @@
               if(twoI >= 1){
                 if(twoI >= 2 && twoI % 2 == 0){
                   var pSpace = datePadding - previousLoc[1][0];
-                  if(pSpace < 27/ratio)
+                  if(pSpace < (27/ratio))
                     datePadding = previousLoc[1][0] + 27/ratio;
                 }
               }
@@ -289,7 +289,7 @@
                 datePadding += one[oneI].startYear - one[oneI - 1].startYear;
                 if(oneI >= 2 && oneI % 2 == 0){
                   var pSpace = datePadding - previousLoc[0][0];
-                  if(pSpace < 27/ratio)
+                  if(pSpace < (27/ratio))
                     datePadding = previousLoc[0][0] + 27/ratio;
                 }
               }
@@ -306,7 +306,7 @@
               if(twoI >= 1){
                 if(twoI >= 2 && twoI % 2 == 0){
                   var pSpace = datePadding - previousLoc[1][0];
-                  if(pSpace < 27/ratio)
+                  if(pSpace < (27/ratio))
                     datePadding = previousLoc[1][0] + 27/ratio;
                 }
               }
@@ -325,7 +325,7 @@
                 datePadding += three[threeI].startYear - three[threeI - 1].startYear;
                 if(threeI >= 2 && threeI % 2 == 0){
                   var pSpace = datePadding - previousLoc[2][0];
-                  if(pSpace < 27/ratio)
+                  if(pSpace < (27/ratio))
                     datePadding = previousLoc[2][0] + 27/ratio;
                 }
               }
@@ -351,7 +351,7 @@
         }
       document.getElementById("submit").innerHTML = ratio;
       var overlays = document.getElementsByClassName('overlay' + format);
-      datePadding =  datePadding * ratio;
+      datePadding =  27 + datePadding * ratio;
       for(i = 0; i < overlays.length; i++)
         overlays[i].style.height = datePadding + "em";
 
