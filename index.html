@@ -349,8 +349,9 @@
           else
               document.getElementById("timeline").innerHTML += out[i];
         }
+      document.getElementById("submit").innerHTML = ratio;
       var overlays = document.getElementsByClassName('overlay' + format);
-      datePadding = 27 + datePadding * ratio;
+      datePadding =  datePadding * ratio;
       for(i = 0; i < overlays.length; i++)
         overlays[i].style.height = datePadding + "em";
 
