@@ -171,7 +171,6 @@
                   var pSpace = datePadding - previousLoc[0];
                   if(pSpace < (27/ratio)){
                     datePadding = previousLoc[0] + 27/ratio; 
-                    document.getElementById("submit").innerHTML += ' ' + oneI;
                   }
                 }
               }
@@ -215,8 +214,10 @@
                 datePadding += one[oneI].startYear - one[oneI - 1].startYear;
                 if(oneI >= 2 && oneI % 2 == 0){
                   var pSpace = datePadding - previousLoc[0][0];
-                  if(pSpace < (27/ratio))
+                  if(pSpace < (27/ratio)){
                     datePadding = previousLoc[0][0] + 27/ratio;
+                    document.getElementById("submit").innerHTML += ' ' + oneI;
+                  }
                 }
               }
               previousLoc[0][0] = previousLoc[0][1];
