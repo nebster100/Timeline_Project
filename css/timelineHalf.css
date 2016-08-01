@@ -5,16 +5,30 @@
   margin-bottom: 15em;
   vertical-align: top;
 }
-#timeline .half:nth-child(1){
+#timeline .half:nth-of-type(1){
+  margin-bottom: 25em;
   margin-right: 2%;
 }
 .half h1{
   font-size: 18pt;
 }
 .half .event {
+  width: 23%;
   padding: 2%;
   padding-right: 5%;
   height: 26em;
+}
+#timeline .overlayhalf:nth-of-type(1) .event{
+  right: 76%;
+}
+#timeline .overlayhalf:nth-of-type(1) .event:nth-of-type(2n){
+  right: 51%;
+}
+#timeline .overlayhalf:nth-of-type(2) .event{
+  right: 26%;
+}
+#timeline .overlayhalf:nth-of-type(2) .event:nth-of-type(2n){
+  right: 1%;
 }
 .half .event img{
   margin: 0em 0em 1.5em 0px;

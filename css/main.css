@@ -182,7 +182,6 @@ a, a:hover, a:visited{
   margin: 0px auto;
   overflow: hidden;
   height: auto;
-  position: relative;
   display: inline-block;
   padding: 0px;
   list-style-type: none;
@@ -190,29 +189,11 @@ a, a:hover, a:visited{
 .overlay{
   background: rgba(255,255,255,.5);
 }
-.datepadding{
-  position: relative;
-  width: 50%;
-  border-radius: 5px;
-  display: block;
-  background-color: rgba(0,0,0,.5);
-  overflow: hidden;
-  float: left;
-  clear: left;
-}
-.datepadding:nth-of-type(4n){
-    clear: right;
-    float: right;
-}
+
 .event{
-  position: relative;
+  position: absolute;
   text-align: left;
-  float: left;
-  clear: left;
-  width: 47%;
-  margin-top: 1em;
   border-radius: 5px;
-  display: block;
   background-color: rgba(0,0,0,.3);
   z-index: 15;
   text-decoration: none;
@@ -224,29 +205,32 @@ a, a:hover, a:visited{
   transition: background .15s linear;
 }
 .event .Text{
+  position: relative;
   background-color: rgba(0, 0, 0, 0);
   color: white;
-  float: left;
   margin: 2%;
   margin-right: 0;
   width: 60%;
 }
 .event h1{
+  position: relative;
   background-color: rgba(0, 0, 0, 0);
   text-align: right;
 }
-.event:nth-of-type(4n+1) {
-  float: right;
-  clear: right;
-}
-.event:nth-of-type(4n+1) h1{
+
+.event:nth-of-type(2n) h1{
   text-align: left;
 }
 .event .name{
+  position: relative;
   background-color: rgba(0, 0, 0, 0);
   text-align: left;
 }
+.event img{
+  position: relative;
+}
 .event a, .event a:hover, .event a:visited{
+  position: relative;
   padding: 1em;
   background: black;
   border-radius: 1em;

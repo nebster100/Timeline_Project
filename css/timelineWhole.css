@@ -4,9 +4,14 @@
   list-style-type: none;
 }
 .whole .event {
+  width: 47%;
+  right: 52%;
   margin-bottom: 1.25%;
   padding: .5%;
   height: 25em;
+}
+.whole .event:nth-of-type(2n) {
+  right: 1%;
 }
 .whole .event .Text{
   font-size: 14pt;

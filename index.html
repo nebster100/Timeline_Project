@@ -148,22 +148,30 @@
             color = getColor();
           }
           colors[i] = color;
-          out[i] = '<div class = "overlay' + format + ' color' + color + '"><div class = "' + format + '"> <div class = "datepadding" style = "height:2em"></div>';
+          out[i] = '<div class = "overlay' + format + ' color' + color + '"><div class = "' + format + '">';
         }
+        var datePadding;
+        var ratio;
         if(numberOfTimelines == 1){
           var earliestYear = one[0].startYear;
           var latestYear = one[one.length - 1].endYear;
           if(latestYear === null)
             latestYear = 2016;
-          var ratio = one.length / (latestYear - earliestYear) * 16;
+          ratio = one.length / (latestYear - earliestYear) * 16;
+          datePadding = 11 / ratio;
           var oneI = 0;
-          var datePadding = 0;
 
           var year;
-          for(year = earliestYear; year < latestYear; year++){
+          for(year = earliestYear; year <= latestYear; year++){
             if(oneI < one.length && one[oneI].startYear == year){
-              if(oneI >= 1)
-                datePadding = one[oneI].startYear - one[oneI - 1].startYear;
+              if(oneI >= 1){
+                datePadding += one[oneI].startYear - one[oneI - 1].startYear;
+                if(oneI >= 2 && oneI % 2 == 0){
+                  var pSpace = one[oneI].startYear - one[oneI - 2].startYear;
+                  if(pSpace < 27/ratio)
+                    datePadding += 27/ratio - pSpace;
+                }
+              }
               out[0] += makeEvent(one[oneI], datePadding * ratio);
               oneI++;
             }
@@ -172,10 +180,9 @@
           }
         }
 
-        else if(numberOfTimelines == 2){
+        if(numberOfTimelines == 2){
           var oneI = 0;
           var twoI = 0;
-          var datePadding, bonusPadding = 0;
           var currentTLine = 0;
 
           var earliestYear;
@@ -192,80 +199,50 @@
           else
             latestYear = two[two.length-1].endYear;
 
-          var ratio = (one.length + two.length) / (latestYear - earliestYear) * 8;
+          ratio = (one.length + two.length) / (latestYear - earliestYear) * 8;
+          datePadding = 11 / ratio;
 
           var year;
-
-          for(year = earliestYear; year < latestYear; year++){
+          for(year = earliestYear; year <= latestYear; year++){
             if(oneI < one.length && one[oneI].startYear == year){
-              if(oneI == 0)
-                datePadding = one[oneI].startYear - earliestYear;
-              else if(oneI % 2 == 1)
-                datePadding = one[oneI].startYear - one[oneI - 1].startYear;
-              else
-                datePadding = one[oneI].startYear - one[oneI - 2].startYear;
-
-              if(currentTLine % 2 != 1){
-                if(bonusPadding > 0)
-                  datePadding += bonusPadding - 27/ratio;
-                if(oneI % 2 == 1){
-                  currentTLine = 3;
-                  bonusPadding = 0;
+              if(oneI >= 1){
+                datePadding += one[oneI].startYear - one[oneI - 1].startYear;
+                if(oneI >= 2 && oneI % 2 == 0){
+                  var pSpace = one[oneI].startYear - one[oneI - 2].startYear;
+                  if(pSpace < 27/ratio)
+                    datePadding += 27/ratio - pSpace;
                 }
-                else{
-                  currentTLine = 1;
-                  bonusPadding = 27/ratio;
-                }
-              }
-              else{
-                if((currentTLine - 1)/2 % 2 == 0)
-                  bonusPadding += 27 / ratio;
-                currentTLine += 2;
               }
               out[0] += makeEvent(one[oneI], datePadding * ratio);
               oneI++;
             }
-            if(twoI < two.length && two[twoI].startYear == year){
-              if(twoI == 0)
-                datePadding = two[twoI].startYear - earliestYear;
-              else if(twoI % 2 == 1)
-                datePadding = two[twoI].startYear - two[twoI - 1].startYear;
-              else
-                datePadding = two[twoI].startYear - two[twoI - 2].startYear;
-              if(currentTLine == 0){
-                currentTLine = 2;
-                bonusPadding = 27/ratio;
-              }
-              else if(currentTLine % 2 != 0){
-                if(bonusPadding > 0)
-                  datePadding += bonusPadding - 27/ratio;
-                if(twoI % 2 == 1){
-                  currentTLine = 4;
-                  bonusPadding = 0;
+            if(oneI < one.length && one[oneI].startYear == year){
+              year--;
+              datePadding--;
+            }
+          if(twoI < two.length && two[twoI].startYear == year){
+              if(twoI >= 1){
+                if(twoI >= 2 && twoI % 2 == 0){
+                  var pSpace = two[twoI].startYear - two[twoI - 2].startYear;
+                  if(pSpace < 27/ratio)
+                    datePadding += 27/ratio - pSpace;
                 }
-                else{
-                  currentTLine = 2;
-                  bonusPadding = 27/ratio;
-                }
-              }
-              else{
-                if((currentTLine)/2 % 2 == 0)
-                  bonusPadding += 27 / ratio;
-                currentTLine += 2;
               }
               out[1] += makeEvent(two[twoI], datePadding * ratio);
               twoI++;
+            }
+            if(twoI < two.length && two[twoI].startYear == year){
+              year--;
+              datePadding--;
+            }
+            datePadding++;
           }
-          if(oneI < one.length && one[oneI].startYear == year || twoI < two.length && two[twoI].startYear == year)
-            year--;
-        }
       }
-      //WIP
-      else if(numberOfTimelines == 3){
+
+      if(numberOfTimelines == 3){
           var oneI = 0;
           var twoI = 0;
           var threeI = 0;
-          var datePadding = [0, 0, 0];
 
           var earliestYear;
           if(one[0].startYear <= two[0].startYear)
@@ -292,50 +269,64 @@
           else
             latestYear = three[three.length-1].endYear;
 
-          var ratio = (one.length + two.length + three.length) / (latestYear - earliestYear) * 8 / 3;
+          ratio = (one.length + two.length + three.length) / (latestYear - earliestYear) * 8 / 3;
+          datePadding = 11 / ratio;
 
           var year;
-          for(year = earliestYear; year < latestYear; year++){
+
+          for(year = earliestYear; year <= latestYear; year++){
             if(oneI < one.length && one[oneI].startYear == year){
-              out[0] += makeEvent(one[oneI], datePadding[0] * ratio);
-              year--;
-              datePadding[0] = 0;
+              if(oneI >= 1){
+                datePadding += one[oneI].startYear - one[oneI - 1].startYear;
+                if(oneI >= 2 && oneI % 2 == 0){
+                  var pSpace = one[oneI].startYear - one[oneI - 2].startYear;
+                  if(pSpace < 27/ratio)
+                    datePadding += 27/ratio - pSpace;
+                }
+              }
+              out[0] += makeEvent(one[oneI], datePadding * ratio);
               oneI++;
-              if(twoI < two.length && !(two[twoI].startYear == year))
-                datePadding[1] += 27/2 / ratio;
-              if(threeI < three.length && !(three[threeI].startYear == year))
-                datePadding[2] += 27/2 / ratio;
             }
-
-           else if(twoI < two.length && two[twoI].startYear == year){
-              out[1] += makeEvent(two[twoI], datePadding[1] * ratio);
+            if(oneI < one.length && one[oneI].startYear == year){
               year--;
-              datePadding[1] = 0;
+              datePadding--;
+            }
+          if(twoI < two.length && two[twoI].startYear == year){
+              if(twoI >= 1){
+                if(twoI >= 2 && twoI % 2 == 0){
+                  var pSpace = two[twoI].startYear - two[twoI - 2].startYear;
+                  if(pSpace < 27/ratio)
+                    datePadding += 27/ratio - pSpace;
+                }
+              }
+              out[1] += makeEvent(two[twoI], datePadding * ratio);
               twoI++;
-              if(oneI < one.length && !(one[oneI].startYear == year))
-                datePadding[0] += 27/2 / ratio;
-              if(threeI < three.length && !(three[threeI].startYear == year))
-                datePadding[2] += 27/2 / ratio;
             }
-
-            else if(threeI < three.length && three[threeI].startYear == year){
-              out[2] += makeEvent(three[threeI], datePadding[2] * ratio);
+            if(twoI < two.length && two[twoI].startYear == year){
               year--;
-              datePadding[2] = 0;
+              datePadding--;
+            }
+            datePadding++;
+            if(threeI < three.length && three[threeI].startYear == year){
+              if(threeI >= 1){
+                datePadding += three[threeI].startYear - three[threeI - 1].startYear;
+                if(threeI >= 2 && threeI % 2 == 0){
+                  var pSpace = three[threeI].startYear - three[threeI - 2].startYear;
+                  if(pSpace < 27/ratio)
+                    datePadding += 27/ratio - pSpace;
+                }
+              }
+              out[2] += makeEvent(three[threeI], datePadding * ratio);
               threeI++;
-              if(oneI < one.length && !(one[oneI].startYear == year))
-                datePadding[0] += 27/2 / ratio;
-              if(twoI < two.length && !(two[twoI].startYear == year))
-                datePadding[1] += 27/2 / ratio;
             }
-
-            else{
-              datePadding[0]++;
-              datePadding[1]++;
-              datePadding[2]++;
+            if(threeI < three.length && three[threeI].startYear == year){
+              year--;
+              datePadding--;
             }
-        }
+          }
       }
+
+
       for(i = 0; i < numberOfTimelines; i++){
           out[i] += '</div></div>';
           if(i == 0)
@@ -343,25 +334,16 @@
           else
               document.getElementById("timeline").innerHTML += out[i];
         }
-
-        var heights = [];
-        heights.length = numberOfTimelines;
-        dHeight = 0;
-        for(i = 0; i < numberOfTimelines; i++){
-           heights[i] = document.getElementsByClassName('color' + colors[i])[0].offsetHeight;
-           if(i == 0 || heights[i] > dHeight)
-            dHeight = heights[i];
-         }
-        var overlays = document.getElementsByClassName('overlay' + format);
-        for(i = 0; i < overlays.length; i++)
-              overlays[i].style.height = dHeight + "px";
+      var overlays = document.getElementsByClassName('overlay' + format);
+      datePadding = 27 + datePadding * ratio;
+      for(i = 0; i < overlays.length; i++)
+        overlays[i].style.height = datePadding + "em";
 
     }
 
       function makeEvent(tlObject, datePadding){
-
         var myEvent;
-        myEvent = '<div class = "datepadding" style = "height: ' + datePadding + 'em"></div><div class= "event"> <h1> ' + tlObject.startDate + ' - ' + tlObject.endDate + '</h1><h1 class = "name"> ' + tlObject.nameTitle + '</h1><img src = "' + tlObject.img + '""></img><div class = "Text">' + tlObject.description + '</div>  <a target= "_blank" href = "' + tlObject.link + '">More Info </a> </div>';
+        myEvent = '<div class= "event" style = "top: ' + datePadding + 'em"> <h1> ' + tlObject.startDate + ' - ' + tlObject.endDate + '</h1><h1 class = "name"> ' + tlObject.nameTitle + '</h1><img src = "' + tlObject.img + '""></img><div class = "Text">' + tlObject.description + '</div>  <a target= "_blank" href = "' + tlObject.link + '">More Info </a> </div>';
         return myEvent;
 
       }
