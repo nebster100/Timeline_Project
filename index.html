@@ -288,7 +288,7 @@
               if(oneI >= 1){
                 datePadding += one[oneI].startYear - one[oneI - 1].startYear;
                 if(oneI >= 2 && oneI % 2 == 0){
-                  var pSpace = one[oneI].startYear - one[oneI - 2].startYear;
+                  var pSpace = datePadding - previousLoc[0][0];
                   if(pSpace < 27/ratio)
                     datePadding += 27/ratio - pSpace;
                 }
