@@ -170,7 +170,7 @@
                 if(oneI >= 2){
                   var pSpace = datePadding - previousLoc[0];
                   if(pSpace < 27/ratio)
-                    datePadding += 27/ratio - pSpace;
+                    datePadding = previousLoc[0] + 27/ratio; 
                 }
               }
               previousLoc[0] = previousLoc[1];
@@ -214,7 +214,7 @@
                 if(oneI >= 2 && oneI % 2 == 0){
                   var pSpace = datePadding - previousLoc[0][0];
                   if(pSpace < 27/ratio)
-                    datePadding += 27/ratio - pSpace;
+                    datePadding = previousLoc[0][0] + 27/ratio;
                 }
               }
               previousLoc[0][0] = previousLoc[0][1];
@@ -231,7 +231,7 @@
                 if(twoI >= 2 && twoI % 2 == 0){
                   var pSpace = datePadding - previousLoc[1][0];
                   if(pSpace < 27/ratio)
-                    datePadding += 27/ratio - pSpace;
+                    datePadding = previousLoc[1][0] + 27/ratio;
                 }
               }
               previousLoc[1][0] = previousLoc[1][1];
@@ -290,7 +290,7 @@
                 if(oneI >= 2 && oneI % 2 == 0){
                   var pSpace = datePadding - previousLoc[0][0];
                   if(pSpace < 27/ratio)
-                    datePadding += 27/ratio - pSpace;
+                    datePadding = previousLoc[0][0] + 27/ratio;
                 }
               }
               previousLoc[0][0] = previousLoc[0][1];
@@ -307,7 +307,7 @@
                 if(twoI >= 2 && twoI % 2 == 0){
                   var pSpace = datePadding - previousLoc[1][0];
                   if(pSpace < 27/ratio)
-                    datePadding += 27/ratio - pSpace;
+                    datePadding = previousLoc[1][0] + 27/ratio;
                 }
               }
               previousLoc[1][0] = previousLoc[1][1];
@@ -326,7 +326,7 @@
                 if(threeI >= 2 && threeI % 2 == 0){
                   var pSpace = datePadding - previousLoc[2][0];
                   if(pSpace < 27/ratio)
-                    datePadding += 27/ratio - pSpace;
+                    datePadding = previousLoc[2][0] + 27/ratio;
                 }
               }
               previousLoc[2][0] = previousLoc[2][1];
