@@ -155,6 +155,7 @@
         if(numberOfTimelines == 1){
           var earliestYear = one[0].startYear;
           var latestYear = one[one.length - 1].endYear;
+          var previousLoc = [0, 0];
           if(latestYear === null)
             latestYear = 2016;
           ratio = one.length / (latestYear - earliestYear) * 16;
@@ -166,12 +167,14 @@
             if(oneI < one.length && one[oneI].startYear == year){
               if(oneI >= 1){
                 datePadding += one[oneI].startYear - one[oneI - 1].startYear;
-                if(oneI >= 2 && oneI % 2 == 0){
-                  var pSpace = one[oneI].startYear - one[oneI - 2].startYear;
+                if(oneI >= 2){
+                  var pSpace = datePadding - previousLoc[0];
                   if(pSpace < 27/ratio)
                     datePadding += 27/ratio - pSpace;
                 }
               }
+              previousLoc[0] = previousLoc[1];
+              previousLoc[1] = datePadding;
               out[0] += makeEvent(one[oneI], datePadding * ratio);
               oneI++;
             }
@@ -184,6 +187,7 @@
           var oneI = 0;
           var twoI = 0;
           var currentTLine = 0;
+          var previousLoc = [[0, 0],[0, 0]];
 
           var earliestYear;
           if(one[0].startYear <= two[0].startYear)
@@ -208,11 +212,13 @@
               if(oneI >= 1){
                 datePadding += one[oneI].startYear - one[oneI - 1].startYear;
                 if(oneI >= 2 && oneI % 2 == 0){
-                  var pSpace = one[oneI].startYear - one[oneI - 2].startYear;
+                  var pSpace = datePadding - previousLoc[0][0];
                   if(pSpace < 27/ratio)
                     datePadding += 27/ratio - pSpace;
                 }
               }
+              previousLoc[0][0] = previousLoc[0][1];
+              previousLoc[0][1] = datePadding;
               out[0] += makeEvent(one[oneI], datePadding * ratio);
               oneI++;
             }
@@ -223,11 +229,13 @@
           if(twoI < two.length && two[twoI].startYear == year){
               if(twoI >= 1){
                 if(twoI >= 2 && twoI % 2 == 0){
-                  var pSpace = two[twoI].startYear - two[twoI - 2].startYear;
+                  var pSpace = datePadding - previousLoc[1][0];
                   if(pSpace < 27/ratio)
                     datePadding += 27/ratio - pSpace;
                 }
               }
+              previousLoc[1][0] = previousLoc[1][1];
+              previousLoc[1][1] = datePadding;
               out[1] += makeEvent(two[twoI], datePadding * ratio);
               twoI++;
             }
@@ -271,6 +279,7 @@
 
           ratio = (one.length + two.length + three.length) / (latestYear - earliestYear) * 8 / 3;
           datePadding = 11 / ratio;
+          var previousLoc = [[0, 0], [0, 0], [0, 0]];
 
           var year;
 
@@ -284,6 +293,8 @@
                     datePadding += 27/ratio - pSpace;
                 }
               }
+              previousLoc[0][0] = previousLoc[0][1];
+              previousLoc[0][1] = datePadding;
               out[0] += makeEvent(one[oneI], datePadding * ratio);
               oneI++;
             }
@@ -294,11 +305,13 @@
           if(twoI < two.length && two[twoI].startYear == year){
               if(twoI >= 1){
                 if(twoI >= 2 && twoI % 2 == 0){
-                  var pSpace = two[twoI].startYear - two[twoI - 2].startYear;
+                  var pSpace = datePadding - previousLoc[1][0];
                   if(pSpace < 27/ratio)
                     datePadding += 27/ratio - pSpace;
                 }
               }
+              previousLoc[1][0] = previousLoc[1][1];
+              previousLoc[1][1] = datePadding;
               out[1] += makeEvent(two[twoI], datePadding * ratio);
               twoI++;
             }
@@ -311,11 +324,13 @@
               if(threeI >= 1){
                 datePadding += three[threeI].startYear - three[threeI - 1].startYear;
                 if(threeI >= 2 && threeI % 2 == 0){
-                  var pSpace = three[threeI].startYear - three[threeI - 2].startYear;
+                  var pSpace = datePadding - previousLoc[2][0];
                   if(pSpace < 27/ratio)
                     datePadding += 27/ratio - pSpace;
                 }
               }
+              previousLoc[2][0] = previousLoc[2][1];
+              previousLoc[2][1] = datePadding;
               out[2] += makeEvent(three[threeI], datePadding * ratio);
               threeI++;
             }
